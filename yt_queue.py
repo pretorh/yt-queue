@@ -32,9 +32,11 @@ elif len(sys.argv) == 3 and sys.argv[1] == 'refresh':
         data['videos'] = []
     for entry in yt_info['entries']:
         if entry is not None:
-            data['videos'].append({
-                'id': entry['id'],
-            })
+            exists = any(x for x in data['videos'] if x['id'] == entry['id'])
+            if not exists:
+                data['videos'].append({
+                    'id': entry['id'],
+                })
 
     print(f'updating {INFO}')
     with open(INFO, 'w', encoding='utf-8') as f:

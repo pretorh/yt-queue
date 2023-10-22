@@ -3,6 +3,7 @@ set -eE
 
 cli=./yt_queue.py
 playlist="https://www.youtube.com/playlist?list=PL0pg4HdU1lNMtRzycn3wbKyfQO5vQZja9"
+example_info=tests/example.info.json
 expected_video_id=BaW_jenozKc
 info=tests/info.json
 log=tests/run.log
@@ -53,6 +54,20 @@ test_can_refresh_info() {
   ok
 }
 
+test_refresh_only_adds_new_item_does_not_remove_old_or_readd_existing() {
+  cp "$example_info" "$info"
+
+  $cli refresh "$info" >$log 2>&1
+
+  assert "$(print_json_field 'len(d["videos"])')" 2
+  assert "$(print_json_field 'd["videos"][0]["id"]')" "invalid-id"
+  assert "$(print_json_field 'd["videos"][1]["id"]')" $expected_video_id
+  assert "$(print_json_field 'd["videos"][1]["fieldToNotRemove"]')" 1
+
+  ok
+}
+
 test_cli_is_executable
 test_can_create_info
 test_can_refresh_info
+test_refresh_only_adds_new_item_does_not_remove_old_or_readd_existing

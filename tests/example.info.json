@@ -1,0 +1,12 @@
+{
+    "url": "https://www.youtube.com/playlist?list=PL0pg4HdU1lNMtRzycn3wbKyfQO5vQZja9",
+    "videos": [
+        {
+            "id": "invalid-id"
+        },
+        {
+            "id": "BaW_jenozKc",
+            "fieldToNotRemove": 1
+        }
+    ]
+}
