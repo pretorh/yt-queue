@@ -85,6 +85,14 @@ elif len(sys.argv) == 5 and sys.argv[1] == 'set-status':
         video['status'] = NEW_STATUS
     print(f'updating {INFO} (found {len(found)} videos)')
     write(INFO, data)
+elif len(sys.argv) == 5 and sys.argv[1] == 'read-field':
+    [INFO, VIDEO_ID, FIELD] = sys.argv[2:5]
+    data = read(INFO)
+    print(f'get videos[{VIDEO_ID}][{FIELD}] from {INFO}', file=sys.stderr)
+
+    found = [video for video in data['videos'] if video['id'] == VIDEO_ID]
+    if any(found) and FIELD in found[0]:
+        print(found[0][FIELD])
 
 elif len(sys.argv) > 1:
     print(f'unknown cli arguments {sys.argv}')

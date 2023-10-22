@@ -97,9 +97,24 @@ $expected_video_id"
   ok
 }
 
+test_can_read_field_in_video() {
+  cp "$example_info" "$info"
+  std_out=tests/out.log
+
+  $cli read-field "$info" "$expected_video_id" "fieldToNotRemove" >$std_out 2>$log
+  assert "$(cat $std_out)" "1"
+
+  # empty string for unknown fields
+  $cli read-field "$info" "invalid-id" "fieldToNotRemove" >$std_out 2>$log
+  assert "$(cat $std_out)" ""
+
+  ok
+}
+
 test_cli_is_executable
 test_cli_fails_for_invalid_params
 test_can_create_info
 test_can_refresh_info
 test_refresh_only_adds_new_item_does_not_remove_old_or_readd_existing
 test_can_manage_item_status
+test_can_read_field_in_video
