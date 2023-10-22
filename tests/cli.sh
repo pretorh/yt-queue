@@ -30,22 +30,6 @@ print_json_field() {
 assert() {
   test "$1" = "$2" || fail "$1 != $2"
 }
-assert_in_output() {
-  message=$1
-  shift
-  for f in "$@" ; do
-    grep -q "$f" "$log" || fail "$f was not found in the output: $message"
-  done
-}
-assert_not_in_output() {
-  message=$1
-  shift
-  for f in "$@" ; do
-    if grep -q "$f" "$log" ; then
-      fail "$f was in the output: $message"
-    fi
-  done
-}
 trap fail ERR
 
 # tests
@@ -92,20 +76,20 @@ test_refresh_only_adds_new_item_does_not_remove_old_or_readd_existing() {
 
 test_can_manage_item_status() {
   cp "$example_info" "$info"
+  std_out=tests/out.log
 
-  $cli get-no-status "$info" >$log 2>&1
-  assert_in_output "get-no-status should return both items when no status is set" \
-    "$expected_video_id" "invalid-id"
+  $cli get-no-status "$info" >$std_out 2>$log
+  assert "$(cat $std_out)" \
+    "invalid-id
+$expected_video_id"
 
   $cli set-status "$info" "invalid-id" "test-status-123" >$log 2>&1
 
-  $cli get-no-status "$info" >$log 2>&1
-  assert_in_output "expected_video_id should still be returned for get-no-status" "$expected_video_id"
-  assert_not_in_output "invalid-id was changed and should not be returned for get-no-status" "invalid-id"
+  $cli get-no-status "$info" >$std_out 2>$log
+  assert "$(cat $std_out)" "$expected_video_id"
 
-  $cli get-status "$info" test-status-123 >$log 2>&1
-  assert_not_in_output "expected_video_id does not have the matching status" "$expected_video_id"
-  assert_in_output "invalid-id was chagned and should be returned" "invalid-id"
+  $cli get-status "$info" test-status-123 >$std_out 2>$log
+  assert "$(cat $std_out)" "invalid-id"
 
   ok
 }

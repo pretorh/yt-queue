@@ -3,7 +3,7 @@ import json
 import sys
 import yt_dlp
 
-print('yt-queue 0.0.0')
+print('yt-queue 0.0.0', file=sys.stderr)
 
 if len(sys.argv) == 4 and sys.argv[1] == 'create':
     INFO = sys.argv[2]
@@ -48,9 +48,9 @@ elif len(sys.argv) == 3 and sys.argv[1] == 'get-no-status':
         url = data['url']
     if not 'videos' in data:
         data['videos'] = []
-    print(f'list videos with no status from {INFO}')
+    print(f'list videos with no status from {INFO}', file=sys.stderr)
     found = [video for video in data['videos'] if 'status' not in video]
-    print(f'found {len(found)} videos')
+    print(f'found {len(found)} videos', file=sys.stderr)
     for video in found:
         print(video['id'])
 elif len(sys.argv) == 4 and sys.argv[1] == 'get-status':
@@ -60,9 +60,9 @@ elif len(sys.argv) == 4 and sys.argv[1] == 'get-status':
         url = data['url']
     if not 'videos' in data:
         data['videos'] = []
-    print(f'list videos with status {STATUS} from {INFO}')
+    print(f'list videos with status {STATUS} from {INFO}', file=sys.stderr)
     found = [video for video in data['videos'] if 'status' in video and video['status'] == STATUS]
-    print(f'found {len(found)} videos')
+    print(f'found {len(found)} videos', file=sys.stderr)
     for video in found:
         print(video['id'])
 elif len(sys.argv) == 5 and sys.argv[1] == 'set-status':
