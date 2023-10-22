@@ -95,5 +95,5 @@ elif len(sys.argv) == 5 and sys.argv[1] == 'read-field':
         print(found[0][FIELD])
 
 elif len(sys.argv) > 1:
-    print(f'unknown cli arguments {sys.argv}')
+    print(f'unknown cli arguments {sys.argv}', file=sys.stderr)
     sys.exit(1)
