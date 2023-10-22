@@ -3,6 +3,7 @@ set -eE
 
 cli=./yt_queue.py
 playlist="https://www.youtube.com/playlist?list=PL0pg4HdU1lNMtRzycn3wbKyfQO5vQZja9"
+expected_video_id=BaW_jenozKc
 info=tests/info.json
 log=tests/run.log
 
@@ -23,7 +24,7 @@ ok() {
 print_json_field() {
   field=$1
   python < "$info" -c \
-    'import sys,json; d=json.load(sys.stdin); print('"$field"')'
+    'import sys,json; d=json.load(sys.stdin); print('"$field"')' || echo "<failed to read: $field>"
 }
 assert() {
   test "$1" = "$2" || fail "$1 != $2"
@@ -45,5 +46,13 @@ test_can_create_info() {
   ok
 }
 
+test_can_refresh_info() {
+  $cli refresh "$info" >$log 2>&1
+  assert "$(print_json_field 'len(d["videos"])')" 1
+  assert "$(print_json_field 'd["videos"][0]["id"]')" $expected_video_id
+  ok
+}
+
 test_cli_is_executable
 test_can_create_info
+test_can_refresh_info
