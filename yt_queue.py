@@ -5,6 +5,21 @@ import yt_dlp
 
 print('yt-queue 0.0.0', file=sys.stderr)
 
+# utils
+
+def read(filename):
+    with open(filename, 'r', encoding='utf-8') as file:
+        playlist_data = json.load(file)
+    if not 'videos' in playlist_data:
+        playlist_data['videos'] = []
+    return playlist_data
+
+def write(filename, playlist_data):
+    with open(filename, 'w', encoding='utf-8') as file:
+        json.dump(playlist_data, file, indent=4)
+
+# cli
+
 if len(sys.argv) == 4 and sys.argv[1] == 'create':
     INFO = sys.argv[2]
     URL = sys.argv[3]
@@ -13,13 +28,11 @@ if len(sys.argv) == 4 and sys.argv[1] == 'create':
     data = {
         'url': URL,
     }
-    with open(INFO, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=4)
+    write(INFO, data)
 elif len(sys.argv) == 3 and sys.argv[1] == 'refresh':
     INFO = sys.argv[2]
-    with open(INFO, 'r', encoding='utf-8') as f:
-        data = json.load(f)
-        url = data['url']
+    data = read(INFO)
+    url = data['url']
     print(f'refreshing {INFO} ({url})')
 
     opts = { 'extract_flat': 'in_playlist' }
@@ -39,15 +52,11 @@ elif len(sys.argv) == 3 and sys.argv[1] == 'refresh':
                 })
 
     print(f'updating {INFO}')
-    with open(INFO, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=4)
+    write(INFO, data)
 elif len(sys.argv) == 3 and sys.argv[1] == 'get-no-status':
     INFO = sys.argv[2]
-    with open(INFO, 'r', encoding='utf-8') as f:
-        data = json.load(f)
-        url = data['url']
-    if not 'videos' in data:
-        data['videos'] = []
+    data = read(INFO)
+
     print(f'list videos with no status from {INFO}', file=sys.stderr)
     found = [video for video in data['videos'] if 'status' not in video]
     print(f'found {len(found)} videos', file=sys.stderr)
@@ -55,11 +64,8 @@ elif len(sys.argv) == 3 and sys.argv[1] == 'get-no-status':
         print(video['id'])
 elif len(sys.argv) == 4 and sys.argv[1] == 'get-status':
     [INFO, STATUS] = sys.argv[2:4]
-    with open(INFO, 'r', encoding='utf-8') as f:
-        data = json.load(f)
-        url = data['url']
-    if not 'videos' in data:
-        data['videos'] = []
+    data = read(INFO)
+
     print(f'list videos with status {STATUS} from {INFO}', file=sys.stderr)
     found = [video for video in data['videos'] if 'status' in video and video['status'] == STATUS]
     print(f'found {len(found)} videos', file=sys.stderr)
@@ -67,19 +73,15 @@ elif len(sys.argv) == 4 and sys.argv[1] == 'get-status':
         print(video['id'])
 elif len(sys.argv) == 5 and sys.argv[1] == 'set-status':
     [INFO, VIDEO_ID, NEW_STATUS] = sys.argv[2:5]
-    with open(INFO, 'r', encoding='utf-8') as f:
-        data = json.load(f)
-        url = data['url']
-    if not 'videos' in data:
-        data['videos'] = []
+    data = read(INFO)
+
     print(f'set videos[{VIDEO_ID}] to status {NEW_STATUS} in {INFO}')
 
     found = [video for video in data['videos'] if video['id'] == VIDEO_ID]
     for video in found:
         video['status'] = NEW_STATUS
     print(f'updating {INFO} (found {len(found)} videos)')
-    with open(INFO, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=4)
+    write(INFO, data)
 
 elif len(sys.argv) > 1:
     print(f'unknown cli arguments {sys.argv}')
