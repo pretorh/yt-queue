@@ -39,6 +39,13 @@ test_cli_is_executable() {
   ok
 }
 
+test_cli_fails_for_invalid_params() {
+  if $cli invalid-command >$log 2>&1 ; then
+    fail "did not fail when invalid command given to cli"
+  fi
+  ok
+}
+
 test_can_create_info() {
   rm -f "$info"
   $cli create "$info" "$playlist" >$log 2>&1
@@ -68,6 +75,7 @@ test_refresh_only_adds_new_item_does_not_remove_old_or_readd_existing() {
 }
 
 test_cli_is_executable
+test_cli_fails_for_invalid_params
 test_can_create_info
 test_can_refresh_info
 test_refresh_only_adds_new_item_does_not_remove_old_or_readd_existing

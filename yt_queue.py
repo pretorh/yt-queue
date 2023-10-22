@@ -41,3 +41,6 @@ elif len(sys.argv) == 3 and sys.argv[1] == 'refresh':
     print(f'updating {INFO}')
     with open(INFO, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=4)
+elif len(sys.argv) > 1:
+    print(f'unknown cli arguments {sys.argv}')
+    sys.exit(1)
