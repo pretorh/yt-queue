@@ -71,6 +71,9 @@ test_refresh_only_adds_new_item_does_not_remove_old_or_readd_existing() {
   assert "$(print_json_field 'd["videos"][1]["id"]')" $expected_video_id
   assert "$(print_json_field 'd["videos"][1]["fieldToNotRemove"]')" 1
 
+  # but it may add new fields
+  assert "$(print_json_field 'd["videos"][1]["url"]')" "https://www.youtube.com/watch?v=$expected_video_id"
+
   ok
 }
 

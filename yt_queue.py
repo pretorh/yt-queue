@@ -45,10 +45,13 @@ elif len(sys.argv) == 3 and sys.argv[1] == 'refresh':
         data['videos'] = []
     for entry in yt_info['entries']:
         if entry is not None:
-            exists = any(x for x in data['videos'] if x['id'] == entry['id'])
-            if not exists:
+            existing = [x for x in data['videos'] if x['id'] == entry['id']]
+            if any(existing):
+                existing[0]['url'] = entry['url']
+            else:
                 data['videos'].append({
                     'id': entry['id'],
+                    'url': entry['url'],
                 })
 
     print(f'updating {INFO}')
