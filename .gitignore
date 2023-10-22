@@ -4,3 +4,4 @@ __pycache__/
 *.log
 dist/
 *.egg-info
+tests/info.json
