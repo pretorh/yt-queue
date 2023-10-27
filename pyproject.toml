@@ -25,6 +25,12 @@ authors = [
 [project.scripts]
 yt-queue = "yt_queue:cli"
 
+[project.optional-dependencies]
+dev = [
+    "build",
+    "pylint"
+]
+
 [project.urls]
 "Homepage" = "https://github.com/pretorh/yt-queue"
 "Bug Tracker" = "https://github.com/pretorh/yt-queue/issues"
