@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yt-queue"
+version = "0.0.0"
+description = "Keep track of videos in Youtube playlists"
+keywords = ["yt-dlp", "YouTube"]
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.7"
+dependencies = [
+    "yt-dlp==2023.10.13",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+authors = [
+    { name = "Hendri Pretorius", email = "pretorh@gmail.com" },
+]
+
+[project.urls]
+"Homepage" = "https://github.com/pretorh/yt-queue"
+"Bug Tracker" = "https://github.com/pretorh/yt-queue/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
