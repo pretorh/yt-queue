@@ -3,8 +3,6 @@ import json
 import sys
 import yt_dlp
 
-print('yt-queue 0.0.0', file=sys.stderr)
-
 # utils
 
 def read(filename):
@@ -99,18 +97,25 @@ def _read_field():
     if any(found) and field in found[0]:
         print(found[0][field])
 
-if len(sys.argv) == 4 and sys.argv[1] == 'create':
-    _create()
-elif len(sys.argv) == 3 and sys.argv[1] == 'refresh':
-    _refresh()
-elif len(sys.argv) == 3 and sys.argv[1] == 'get-no-status':
-    _get_no_status()
-elif len(sys.argv) == 4 and sys.argv[1] == 'get-status':
-    _get_status()
-elif len(sys.argv) == 5 and sys.argv[1] == 'set-status':
-    _set_status()
-elif len(sys.argv) == 5 and sys.argv[1] == 'read-field':
-    _read_field()
-elif len(sys.argv) > 1:
-    print(f'unknown cli arguments {sys.argv}', file=sys.stderr)
-    sys.exit(1)
+def cli():
+    print('yt-queue 0.0.0', file=sys.stderr)
+
+    if len(sys.argv) == 4 and sys.argv[1] == 'create':
+        _create()
+    elif len(sys.argv) == 3 and sys.argv[1] == 'refresh':
+        _refresh()
+    elif len(sys.argv) == 3 and sys.argv[1] == 'get-no-status':
+        _get_no_status()
+    elif len(sys.argv) == 4 and sys.argv[1] == 'get-status':
+        _get_status()
+    elif len(sys.argv) == 5 and sys.argv[1] == 'set-status':
+        _set_status()
+    elif len(sys.argv) == 5 and sys.argv[1] == 'read-field':
+        _read_field()
+    elif len(sys.argv) > 1:
+        print(f'unknown cli arguments {sys.argv}', file=sys.stderr)
+        sys.exit(1)
+
+# executable
+if __name__ == '__main__':
+    cli()
