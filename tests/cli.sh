@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eE
 
-cli=./yt_queue.py
+cli=./yt-queue
 playlist="https://www.youtube.com/playlist?list=PL0pg4HdU1lNMtRzycn3wbKyfQO5vQZja9"
 example_info=tests/example.info.json
 expected_video_id=BaW_jenozKc

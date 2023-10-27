@@ -115,7 +115,3 @@ def cli():
     elif len(sys.argv) > 1:
         print(f'unknown cli arguments {sys.argv}', file=sys.stderr)
         sys.exit(1)
-
-# executable
-if __name__ == '__main__':
-    cli()
