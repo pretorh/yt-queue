@@ -20,20 +20,21 @@ def write(filename, playlist_data):
 
 # cli
 
-if len(sys.argv) == 4 and sys.argv[1] == 'create':
-    INFO = sys.argv[2]
-    URL = sys.argv[3]
-    print(f'creating {INFO} for {URL}')
+def _create():
+    info = sys.argv[2]
+    url = sys.argv[3]
+    print(f'creating {info} for {url}')
 
     data = {
-        'url': URL,
+        'url': url,
     }
-    write(INFO, data)
-elif len(sys.argv) == 3 and sys.argv[1] == 'refresh':
-    INFO = sys.argv[2]
-    data = read(INFO)
+    write(info, data)
+
+def _refresh():
+    info = sys.argv[2]
+    data = read(info)
     url = data['url']
-    print(f'refreshing {INFO} ({url})')
+    print(f'refreshing {info} ({url})')
 
     opts = { 'extract_flat': 'in_playlist' }
     with yt_dlp.YoutubeDL(opts) as ydl:
@@ -54,46 +55,62 @@ elif len(sys.argv) == 3 and sys.argv[1] == 'refresh':
                     'url': entry['url'],
                 })
 
-    print(f'updating {INFO}')
-    write(INFO, data)
-elif len(sys.argv) == 3 and sys.argv[1] == 'get-no-status':
-    INFO = sys.argv[2]
-    data = read(INFO)
+    print(f'updating {info}')
+    write(info, data)
 
-    print(f'list videos with no status from {INFO}', file=sys.stderr)
+def _get_no_status():
+    info = sys.argv[2]
+    data = read(info)
+
+    print(f'list videos with no status from {info}', file=sys.stderr)
     found = [video for video in data['videos'] if 'status' not in video]
     print(f'found {len(found)} videos', file=sys.stderr)
     for video in found:
         print(video['id'])
-elif len(sys.argv) == 4 and sys.argv[1] == 'get-status':
-    [INFO, STATUS] = sys.argv[2:4]
-    data = read(INFO)
 
-    print(f'list videos with status {STATUS} from {INFO}', file=sys.stderr)
-    found = [video for video in data['videos'] if 'status' in video and video['status'] == STATUS]
+def _get_status():
+    [info, status] = sys.argv[2:4]
+    data = read(info)
+
+    print(f'list videos with status {status} from {info}', file=sys.stderr)
+    found = [video for video in data['videos'] if 'status' in video and video['status'] == status]
     print(f'found {len(found)} videos', file=sys.stderr)
     for video in found:
         print(video['id'])
-elif len(sys.argv) == 5 and sys.argv[1] == 'set-status':
-    [INFO, VIDEO_ID, NEW_STATUS] = sys.argv[2:5]
-    data = read(INFO)
 
-    print(f'set videos[{VIDEO_ID}] to status {NEW_STATUS} in {INFO}')
+def _set_status():
+    [info, video_id, new_status] = sys.argv[2:5]
+    data = read(info)
 
-    found = [video for video in data['videos'] if video['id'] == VIDEO_ID]
+    print(f'set videos[{video_id}] to status {new_status} in {info}')
+
+    found = [video for video in data['videos'] if video['id'] == video_id]
     for video in found:
-        video['status'] = NEW_STATUS
-    print(f'updating {INFO} (found {len(found)} videos)')
-    write(INFO, data)
+        video['status'] = new_status
+    print(f'updating {info} (found {len(found)} videos)')
+    write(info, data)
+
+def _read_field():
+    [info, video_id, field] = sys.argv[2:5]
+    data = read(info)
+    print(f'get videos[{video_id}][{field}] from {info}', file=sys.stderr)
+
+    found = [video for video in data['videos'] if video['id'] == video_id]
+    if any(found) and field in found[0]:
+        print(found[0][field])
+
+if len(sys.argv) == 4 and sys.argv[1] == 'create':
+    _create()
+elif len(sys.argv) == 3 and sys.argv[1] == 'refresh':
+    _refresh()
+elif len(sys.argv) == 3 and sys.argv[1] == 'get-no-status':
+    _get_no_status()
+elif len(sys.argv) == 4 and sys.argv[1] == 'get-status':
+    _get_status()
+elif len(sys.argv) == 5 and sys.argv[1] == 'set-status':
+    _set_status()
 elif len(sys.argv) == 5 and sys.argv[1] == 'read-field':
-    [INFO, VIDEO_ID, FIELD] = sys.argv[2:5]
-    data = read(INFO)
-    print(f'get videos[{VIDEO_ID}][{FIELD}] from {INFO}', file=sys.stderr)
-
-    found = [video for video in data['videos'] if video['id'] == VIDEO_ID]
-    if any(found) and FIELD in found[0]:
-        print(found[0][FIELD])
-
+    _read_field()
 elif len(sys.argv) > 1:
     print(f'unknown cli arguments {sys.argv}', file=sys.stderr)
     sys.exit(1)
