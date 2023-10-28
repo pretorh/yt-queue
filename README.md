@@ -12,3 +12,5 @@ pip install . '.[dev]'
 other dependencies: `shellcheck`
 
 tests: `./check.sh`
+
+test the built packages: `./dist-check.sh dist/...`
