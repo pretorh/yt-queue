@@ -27,8 +27,8 @@ yt-queue = "yt_queue:cli"
 
 [project.optional-dependencies]
 dev = [
-    "build",
-    "pylint"
+    "build==1.0.3",
+    "pylint==3.0.2",
 ]
 
 [project.urls]
