@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 set -eE
 
-cli=./yt-queue
+cli=${YT_QUEUE-./yt-queue}
 playlist="https://www.youtube.com/playlist?list=PL0pg4HdU1lNMtRzycn3wbKyfQO5vQZja9"
 example_info=tests/example.info.json
 expected_video_id=BaW_jenozKc
 info=tests/info.json
 log=tests/run.log
+
+echo "# using cli from $cli = $(which "$cli")"
 
 # utils
 
