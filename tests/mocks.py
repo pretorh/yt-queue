@@ -48,3 +48,13 @@ def response_video_playlist_info(vid):
         'id': f'{vid}',
         'url': f'https://example.com/video/v{vid}',
     }
+
+def data_dict():
+    return {
+        'url': 'https://example.com/playlist/1',
+        'videos': [
+            { 'id': 'idA', 'url': 'https://example.com/videos/a' },
+            { 'id': 'idB', 'url': 'https://example.com/videos/b', 'status': 'test' },
+            { 'id': 'idC', 'url': 'https://example.com/videos/c', 'status': 'test' },
+        ],
+    }

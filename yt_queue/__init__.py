@@ -64,6 +64,9 @@ def refresh(info):
 
 def _get_no_status():
     info = sys.argv[2]
+    get_no_status(info)
+
+def get_no_status(info):
     data = read(info)
 
     print(f'list videos with no status from {info}', file=sys.stderr)
@@ -74,6 +77,9 @@ def _get_no_status():
 
 def _get_status():
     [info, status] = sys.argv[2:4]
+    get_status(info, status)
+
+def get_status(info, status):
     data = read(info)
 
     print(f'list videos with status {status} from {info}', file=sys.stderr)
@@ -84,6 +90,9 @@ def _get_status():
 
 def _set_status():
     [info, video_id, new_status] = sys.argv[2:5]
+    set_status(info, video_id, new_status)
+
+def set_status(info, video_id, new_status):
     data = read(info)
 
     print(f'set videos[{video_id}] to status {new_status} in {info}')
@@ -96,6 +105,9 @@ def _set_status():
 
 def _read_field():
     [info, video_id, field] = sys.argv[2:5]
+    read_field(info, video_id, field)
+
+def read_field(info, video_id, field):
     data = read(info)
     print(f'get videos[{video_id}][{field}] from {info}', file=sys.stderr)
 
