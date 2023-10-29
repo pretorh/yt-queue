@@ -29,6 +29,7 @@ yt-queue = "yt_queue:cli"
 dev = [
     "build==1.0.3",
     "pylint==3.0.2",
+    "pytest==7.4.3",
 ]
 
 [project.urls]

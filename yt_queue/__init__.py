@@ -21,6 +21,9 @@ def write(filename, playlist_data):
 def _create():
     info = sys.argv[2]
     url = sys.argv[3]
+    create(info, url)
+
+def create(info, url):
     print(f'creating {info} for {url}')
 
     data = {
