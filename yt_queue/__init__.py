@@ -33,6 +33,9 @@ def create(info, url):
 
 def _refresh():
     info = sys.argv[2]
+    refresh(info)
+
+def refresh(info):
     data = read(info)
     url = data['url']
     print(f'refreshing {info} ({url})')
