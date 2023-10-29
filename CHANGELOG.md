@@ -1,5 +1,11 @@
 # Changelog
 
+## unreleased
+
+### Added
+
+- `pytest`s for cli functions
+
 ## 0.0.0
 
 ### Added

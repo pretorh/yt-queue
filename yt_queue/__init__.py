@@ -21,6 +21,9 @@ def write(filename, playlist_data):
 def _create():
     info = sys.argv[2]
     url = sys.argv[3]
+    create(info, url)
+
+def create(info, url):
     print(f'creating {info} for {url}')
 
     data = {
@@ -30,6 +33,9 @@ def _create():
 
 def _refresh():
     info = sys.argv[2]
+    refresh(info)
+
+def refresh(info):
     data = read(info)
     url = data['url']
     print(f'refreshing {info} ({url})')
@@ -58,6 +64,9 @@ def _refresh():
 
 def _get_no_status():
     info = sys.argv[2]
+    get_no_status(info)
+
+def get_no_status(info):
     data = read(info)
 
     print(f'list videos with no status from {info}', file=sys.stderr)
@@ -68,6 +77,9 @@ def _get_no_status():
 
 def _get_status():
     [info, status] = sys.argv[2:4]
+    get_status(info, status)
+
+def get_status(info, status):
     data = read(info)
 
     print(f'list videos with status {status} from {info}', file=sys.stderr)
@@ -78,6 +90,9 @@ def _get_status():
 
 def _set_status():
     [info, video_id, new_status] = sys.argv[2:5]
+    set_status(info, video_id, new_status)
+
+def set_status(info, video_id, new_status):
     data = read(info)
 
     print(f'set videos[{video_id}] to status {new_status} in {info}')
@@ -90,6 +105,9 @@ def _set_status():
 
 def _read_field():
     [info, video_id, field] = sys.argv[2:5]
+    read_field(info, video_id, field)
+
+def read_field(info, video_id, field):
     data = read(info)
     print(f'get videos[{video_id}][{field}] from {info}', file=sys.stderr)
 
