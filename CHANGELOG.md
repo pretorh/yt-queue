@@ -1,10 +1,10 @@
 # Changelog
 
-## unreleased
+## 0.0.1
 
 ### Added
 
-- `pytest`s for cli functions
+- exposing cli functions with parameters
 
 ## 0.0.0
 
