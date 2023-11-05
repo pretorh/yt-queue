@@ -42,6 +42,9 @@ def response_extract_info(video_count=1):
         'entries': video_responses,
     }
 
+def append_to_response(response, item):
+    response['entries'].append(item)
+
 def response_video_playlist_info(vid):
     " returns a simplified response for a video in a playlist for extract_info "
     return {

@@ -1,20 +1,14 @@
-#!/usr/bin/env python
-import json
 import sys
-import yt_dlp
+from . import file
+from .internal import mapper, yt_dlp_wrapper
 
 # utils
 
 def read(filename):
-    with open(filename, 'r', encoding='utf-8') as file:
-        playlist_data = json.load(file)
-    if not 'videos' in playlist_data:
-        playlist_data['videos'] = []
-    return playlist_data
+    return file.read(filename)
 
 def write(filename, playlist_data):
-    with open(filename, 'w', encoding='utf-8') as file:
-        json.dump(playlist_data, file, indent=4)
+    return file.write(filename, playlist_data)
 
 # cli
 
@@ -39,25 +33,11 @@ def refresh(info):
     data = read(info)
     url = data['url']
     print(f'refreshing {info} ({url})')
-
-    opts = { 'extract_flat': 'in_playlist' }
-    with yt_dlp.YoutubeDL(opts) as ydl:
-        yt_info = ydl.extract_info(url)
-        yt_info = ydl.sanitize_info(yt_info)
+    yt_info = yt_dlp_wrapper.extract_info(url)
 
     print('parsing playlist entries')
-    if not 'videos' in data:
-        data['videos'] = []
     for entry in yt_info['entries']:
-        if entry is not None:
-            existing = [x for x in data['videos'] if x['id'] == entry['id']]
-            if any(existing):
-                existing[0]['url'] = entry['url']
-            else:
-                data['videos'].append({
-                    'id': entry['id'],
-                    'url': entry['url'],
-                })
+        mapper.map_and_merge(entry, data['videos'])
 
     print(f'updating {info}')
     write(info, data)
