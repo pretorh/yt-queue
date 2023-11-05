@@ -1,6 +1,6 @@
 import sys
 from . import file
-from .internal import yt_dlp_wrapper
+from .internal import mapper, yt_dlp_wrapper
 
 # utils
 
@@ -39,15 +39,7 @@ def refresh(info):
     if not 'videos' in data:
         data['videos'] = []
     for entry in yt_info['entries']:
-        if entry is not None:
-            existing = [x for x in data['videos'] if x['id'] == entry['id']]
-            if any(existing):
-                existing[0]['url'] = entry['url']
-            else:
-                data['videos'].append({
-                    'id': entry['id'],
-                    'url': entry['url'],
-                })
+        mapper.map_and_merge(entry, data['videos'])
 
     print(f'updating {info}')
     write(info, data)
