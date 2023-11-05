@@ -1,20 +1,14 @@
-#!/usr/bin/env python
-import json
 import sys
 import yt_dlp
+from . import file
 
 # utils
 
 def read(filename):
-    with open(filename, 'r', encoding='utf-8') as file:
-        playlist_data = json.load(file)
-    if not 'videos' in playlist_data:
-        playlist_data['videos'] = []
-    return playlist_data
+    return file.read(filename)
 
 def write(filename, playlist_data):
-    with open(filename, 'w', encoding='utf-8') as file:
-        json.dump(playlist_data, file, indent=4)
+    return file.write(filename, playlist_data)
 
 # cli
 
