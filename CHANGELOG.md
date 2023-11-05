@@ -1,5 +1,11 @@
 # Changelog
 
+## unreleased
+
+### Changed
+
+- Save `title` and `duration` for each video
+
 ## 0.0.1
 
 ### Added

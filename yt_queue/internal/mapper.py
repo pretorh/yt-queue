@@ -5,6 +5,8 @@ def map_entry_to_video(entry):
     return {
             'id': entry['id'],
             'url': entry['url'],
+            'title': entry['title'],
+            'duration': entry['duration'],
     }
 
 def map_and_merge(entry, videos):
@@ -14,6 +16,6 @@ def map_and_merge(entry, videos):
 
     existing = [x for x in videos if x['id'] == entry['id']]
     if any(existing):
-        existing[0]['url'] = entry['url']
+        existing[0].update(video)
     else:
         videos.append(video)

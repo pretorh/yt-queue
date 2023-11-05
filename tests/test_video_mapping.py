@@ -11,3 +11,13 @@ def test_ignore_none_entries():
     entry = None
     video = map_entry_to_video(entry)
     assert video is None
+
+def test_map_duration():
+    entry = response_video_playlist_info(vid='id1')
+    video = map_entry_to_video(entry)
+    assert video['duration'] == 10
+
+def test_map_title():
+    entry = response_video_playlist_info(vid='id1')
+    video = map_entry_to_video(entry)
+    assert video['title'] == "video id1"
