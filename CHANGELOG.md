@@ -1,8 +1,8 @@
 # Changelog
 
-## unreleased
+## 0.1.0
 
-### Changed
+### Added
 
 - Save `title` and `duration` for each video
 

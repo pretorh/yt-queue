@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "yt-queue"
-version = "0.0.1"
+version = "0.1.0"
 description = "CLI to keep track of videos in Youtube playlists"
 keywords = ["yt-dlp", "YouTube"]
 readme = "README.md"
