@@ -36,8 +36,6 @@ def refresh(info):
     yt_info = yt_dlp_wrapper.extract_info(url)
 
     print('parsing playlist entries')
-    if not 'videos' in data:
-        data['videos'] = []
     for entry in yt_info['entries']:
         mapper.map_and_merge(entry, data['videos'])
 
