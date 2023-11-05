@@ -96,7 +96,7 @@ def read_field(info, video_id, field):
         print(found[0][field])
 
 def cli():
-    print('yt-queue 0.0.0', file=sys.stderr)
+    print('yt-queue 0.1.1', file=sys.stderr)
 
     if len(sys.argv) == 4 and sys.argv[1] == 'create':
         _create()
