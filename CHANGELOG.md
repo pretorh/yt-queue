@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1
+
+### Fixed
+
+- Version in cli output
+
 ## 0.1.0
 
 ### Added
