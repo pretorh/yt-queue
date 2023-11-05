@@ -1,6 +1,6 @@
 import sys
-import yt_dlp
 from . import file
+from .internal import yt_dlp_wrapper
 
 # utils
 
@@ -33,11 +33,7 @@ def refresh(info):
     data = read(info)
     url = data['url']
     print(f'refreshing {info} ({url})')
-
-    opts = { 'extract_flat': 'in_playlist' }
-    with yt_dlp.YoutubeDL(opts) as ydl:
-        yt_info = ydl.extract_info(url)
-        yt_info = ydl.sanitize_info(yt_info)
+    yt_info = yt_dlp_wrapper.extract_info(url)
 
     print('parsing playlist entries')
     if not 'videos' in data:
