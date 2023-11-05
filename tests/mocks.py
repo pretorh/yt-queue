@@ -32,7 +32,13 @@ def mock_yt_dlp(monkeypatch, extract_info=None):
     monkeypatch.setattr(yt_dlp, "YoutubeDL", create_mock)
 
 def response_extract_info(video_count=1):
-    " returns a simplified version of playlist data for extract_info "
+    """
+    returns a simplified version of playlist data for extract_info
+    test using:
+        from yt_queue.internal.yt_dlp_wrapper import extract_info
+        from pprint import pprint
+        pprint({**d, 'entries': []})
+    """
     video_responses=[]
     for i in range(0, video_count):
         video_responses.append(response_video_playlist_info(i))
@@ -46,10 +52,17 @@ def append_to_response(response, item):
     response['entries'].append(item)
 
 def response_video_playlist_info(vid):
-    " returns a simplified response for a video in a playlist for extract_info "
+    """
+    returns a simplified response for a video in a playlist for extract_info
+    test using:
+        ...
+        pprint(d['entries'][0])
+    """
     return {
         'id': f'{vid}',
         'url': f'https://example.com/video/v{vid}',
+        'duration': 10,
+        'title': f"video {vid}",
     }
 
 def data_dict():

@@ -5,6 +5,8 @@ def map_entry_to_video(entry):
     return {
             'id': entry['id'],
             'url': entry['url'],
+            'title': entry['title'],
+            'duration': entry['duration'],
     }
 
 def map_and_merge(entry, videos):
