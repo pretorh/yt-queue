@@ -91,6 +91,8 @@ jobs:
   publish:
     if: ${{ github.ref_name == 'master' && startsWith(github.event.head_commit.message, 'bump to version ')}}
     needs:
+      - lint
+      - test
       - dist-check
     runs-on: ubuntu-latest
     steps:
