@@ -4,7 +4,6 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "yt-queue"
-version = "0.1.1"
 description = "CLI to keep track of videos in Youtube playlists"
 keywords = ["yt-dlp", "YouTube"]
 readme = "README.md"
@@ -21,6 +20,7 @@ classifiers = [
 authors = [
     { name = "Hendri Pretorius", email = "pretorh@gmail.com" },
 ]
+dynamic = ["version"]
 
 [project.scripts]
 yt-queue = "yt_queue:cli"
@@ -35,6 +35,9 @@ dev = [
 [project.urls]
 "Homepage" = "https://github.com/pretorh/yt-queue"
 "Bug Tracker" = "https://github.com/pretorh/yt-queue/issues"
+
+[tool.setuptools.dynamic]
+version = {attr = "yt_queue.VERSION"}
 
 [tool.setuptools.packages.find]
 where = ["."]
