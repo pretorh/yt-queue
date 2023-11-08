@@ -9,9 +9,6 @@ keywords = ["yt-dlp", "YouTube"]
 readme = "README.md"
 license = {file = "LICENSE"}
 requires-python = ">=3.7"
-dependencies = [
-    "yt-dlp==2023.10.13",
-]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
@@ -20,17 +17,10 @@ classifiers = [
 authors = [
     { name = "Hendri Pretorius", email = "pretorh@gmail.com" },
 ]
-dynamic = ["version"]
+dynamic = ["version", "dependencies", "optional-dependencies"]
 
 [project.scripts]
 yt-queue = "yt_queue:cli"
-
-[project.optional-dependencies]
-dev = [
-    "build==1.0.3",
-    "pylint==3.0.2",
-    "pytest==7.4.3",
-]
 
 [project.urls]
 "Homepage" = "https://github.com/pretorh/yt-queue"
@@ -38,6 +28,8 @@ dev = [
 
 [tool.setuptools.dynamic]
 version = {attr = "yt_queue.VERSION"}
+dependencies = {file = "requirements.txt"}
+optional-dependencies = {dev = {file = "requirements-dev.txt"}}
 
 [tool.setuptools.packages.find]
 where = ["."]
