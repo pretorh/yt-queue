@@ -19,7 +19,7 @@ jobs:
       with:
         python-version: ${{ env.DEFAULT_PYTHON }}
     - name: Install dependencies
-      run: pip install yt-dlp==2023.10.13 pylint==3.0.2
+      run: pip install -r requirements.txt -r requirements-dev.txt
     - name: Lint with pylint
       run: pylint ./**/*.py
 
@@ -37,7 +37,7 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
-      run: pip install yt-dlp==2023.10.13 pytest==7.4.3
+      run: pip install -r requirements.txt -r requirements-dev.txt
     - name: Test with pytest
       run: pytest
 
@@ -52,8 +52,7 @@ jobs:
         python-version: ${{ env.DEFAULT_PYTHON }}
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install yt-dlp==2023.10.13
+        pip install -r requirements.txt
         pip install --upgrade build
     - name: Build package
       run: python3 -m build
