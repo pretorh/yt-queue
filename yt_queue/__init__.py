@@ -2,6 +2,8 @@ import sys
 from . import file
 from .internal import mapper, yt_dlp_wrapper
 
+VERSION = '0.1.1'
+
 # utils
 
 def read(filename):
@@ -96,7 +98,7 @@ def read_field(info, video_id, field):
         print(found[0][field])
 
 def cli():
-    print('yt-queue 0.1.1', file=sys.stderr)
+    print(f'yt-queue {VERSION}', file=sys.stderr)
 
     if len(sys.argv) == 4 and sys.argv[1] == 'create':
         _create()
