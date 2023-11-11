@@ -20,8 +20,8 @@ jobs:
         python-version: ${{ env.DEFAULT_PYTHON }}
     - name: Install dependencies
       run: pip install -r requirements.txt -r requirements-dev.txt
-    - name: Lint with pylint
-      run: pylint ./**/*.py
+    - name: Lint with pylint and shellcheck using script
+      run: ./dev/lint.sh
 
   test:
     if: ${{ github.ref_name == 'master' || github.event_name == 'pull_request' }}

@@ -1,8 +1,6 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -e
 
 pytest
 tests/cli.sh
-
-python "$(which pylint)" ./**/*.py
-shellcheck yt-queue ./**/*.sh
+dev/lint.sh
