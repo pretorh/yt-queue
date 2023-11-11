@@ -8,7 +8,7 @@ description = "CLI to keep track of videos in Youtube playlists"
 keywords = ["yt-dlp", "YouTube"]
 readme = "README.md"
 license = {file = "LICENSE"}
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
