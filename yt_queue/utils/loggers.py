@@ -1,6 +1,20 @@
 import sys
 
-class StdLogger:
+class NoOpLogger:
+    def info(self, message):
+        pass
+    def warning(self, message):
+        pass
+    def error(self, message):
+        pass
+    def output(self, data):
+        pass
+
+class QuietLogger(NoOpLogger):
+    def output(self, data):
+        _stdout(data)
+
+class StdLogger(QuietLogger):
     def __init__(self, formatted_output=False):
         self.formatted_output = formatted_output
 
@@ -15,9 +29,6 @@ class StdLogger:
 
     def error(self, message):
         _stderr(message)
-
-    def output(self, data):
-        _stdout(data)
 
 def _stdout(message):
     print(message)
