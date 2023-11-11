@@ -1,10 +1,16 @@
 # Changelog
 
+## unreleased
+
+### Changed
+
+- Less verbose output in CLI
+
 ## 0.1.1
 
 ### Fixed
 
-- Version in cli output
+- Version number in CLI output
 
 ## 0.1.0
 
@@ -16,7 +22,7 @@
 
 ### Added
 
-- exposing cli functions with parameters
+- exposing CLI functions with parameters
 
 ## 0.0.0
 
