@@ -11,6 +11,10 @@
 - Less verbose output in CLI
 - Less verbose `yt_dlp` output
 
+### Removed
+
+- Python 3.7 support (minimum is now `3.8`)
+
 ## 0.1.1
 
 ### Fixed
