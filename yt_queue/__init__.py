@@ -3,7 +3,7 @@ from . import file
 from .internal import mapper, yt_dlp_wrapper
 from .utils.loggers import StdLogger
 
-VERSION = '0.1.1'
+VERSION = '0.2.0'
 _fullname = f"yt-queue {VERSION}"
 
 # utils
