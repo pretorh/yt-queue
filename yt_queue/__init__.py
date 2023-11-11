@@ -1,6 +1,7 @@
 import sys
 from . import file
 from .internal import mapper, yt_dlp_wrapper
+from .utils.loggers import StdLogger
 
 VERSION = '0.1.1'
 _fullname = f"yt-queue {VERSION}"
@@ -15,28 +16,29 @@ def write(filename, playlist_data):
 
 # cli
 
+_log = StdLogger()
+
 def _create():
     info = sys.argv[2]
     url = sys.argv[3]
     create(info, url)
 
-def create(info, url):
-
+def create(info, url, logger=_log):
     data = {
         'url': url,
     }
     write(info, data)
-    print(f'{info} created')
+    logger.info(f'{info} created')
 
 def _refresh():
     info = sys.argv[2]
     refresh(info)
 
-def refresh(info):
+def refresh(info, logger=_log):
     data = read(info)
     url = data['url']
-    print(f'Refreshing {info} ({url})')
-    yt_info = yt_dlp_wrapper.extract_info(url)
+    logger.info(f'Refreshing {info} ({url})')
+    yt_info = yt_dlp_wrapper.extract_info(url, yt_dlp_wrapper.ProgressLogger(logger))
 
     for entry in yt_info['entries']:
         mapper.map_and_merge(entry, data['videos'])
@@ -47,25 +49,27 @@ def _get_no_status():
     info = sys.argv[2]
     get_no_status(info)
 
-def get_no_status(info):
+def get_no_status(info, logger=_log):
+    _log.formatted_output = True
     data = read(info)
 
     found = [video for video in data['videos'] if 'status' not in video]
-    print(f'Found {len(found)} videos with no status in {info}', file=sys.stderr)
+    logger.info(f'Found {len(found)} videos with no status in {info}')
     for video in found:
-        print(video['id'])
+        logger.output(video['id'])
 
 def _get_status():
     [info, status] = sys.argv[2:4]
     get_status(info, status)
 
-def get_status(info, status):
+def get_status(info, status, logger=_log):
+    _log.formatted_output = True
     data = read(info)
 
     found = [video for video in data['videos'] if 'status' in video and video['status'] == status]
-    print(f'Found {len(found)} videos with status {status} in {info}', file=sys.stderr)
+    logger.info(f'Found {len(found)} videos with status {status} in {info}')
     for video in found:
-        print(video['id'])
+        logger.output(video['id'])
 
 def _set_status():
     [info, video_id, new_status] = sys.argv[2:5]
@@ -83,16 +87,17 @@ def _read_field():
     [info, video_id, field] = sys.argv[2:5]
     read_field(info, video_id, field)
 
-def read_field(info, video_id, field):
+def read_field(info, video_id, field, logger=_log):
+    _log.formatted_output = True
     data = read(info)
 
     found = [video for video in data['videos'] if video['id'] == video_id]
     if any(found) and field in found[0]:
-        print(found[0][field])
+        logger.output(found[0][field])
 
 def cli():
     if len(sys.argv) == 2 and sys.argv[1] == 'version':
-        print(_fullname)
+        _log.output(_fullname)
     elif len(sys.argv) == 4 and sys.argv[1] == 'create':
         _create()
     elif len(sys.argv) == 3 and sys.argv[1] == 'refresh':
@@ -106,6 +111,6 @@ def cli():
     elif len(sys.argv) == 5 and sys.argv[1] == 'read-field':
         _read_field()
     else:
-        print(_fullname)
-        print(f'unknown cli arguments {sys.argv}', file=sys.stderr)
+        _log.info(_fullname)
+        _log.warning(f'unknown cli arguments {sys.argv}')
         sys.exit(1)

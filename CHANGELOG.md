@@ -2,9 +2,14 @@
 
 ## unreleased
 
+### Added
+
+- Add loggers to control output
+
 ### Changed
 
 - Less verbose output in CLI
+- Less verbose `yt_dlp` output
 
 ## 0.1.1
 
