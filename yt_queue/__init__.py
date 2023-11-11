@@ -38,7 +38,7 @@ def refresh(info, logger=_log):
     data = read(info)
     url = data['url']
     logger.info(f'Refreshing {info} ({url})')
-    yt_info = yt_dlp_wrapper.extract_info(url)
+    yt_info = yt_dlp_wrapper.extract_info(url, yt_dlp_wrapper.ProgressLogger(logger))
 
     for entry in yt_info['entries']:
         mapper.map_and_merge(entry, data['videos'])
