@@ -8,7 +8,7 @@ expected_video_id=BaW_jenozKc
 info=tests/info.json
 log=tests/run.log
 
-echo "# using cli from $cli = $(which "$cli")"
+echo "# using cli from $cli = $(which "$cli") = $("$cli" version)"
 
 # utils
 
@@ -37,7 +37,7 @@ trap fail ERR
 # tests
 
 test_cli_is_executable() {
-  $cli >$log 2>&1
+  $cli version >$log
   ok
 }
 
@@ -50,7 +50,7 @@ test_cli_fails_for_invalid_params() {
 
 test_can_create_info() {
   rm -f "$info"
-  $cli create "$info" "$playlist" >$log 2>&1
+  $cli create "$info" "$playlist" >$log
   test -f "$info" || fail "json file not created"
   assert "$(print_json_field 'd["url"]')" "$playlist"
   ok
@@ -88,7 +88,7 @@ test_can_manage_item_status() {
     "invalid-id
 $expected_video_id"
 
-  $cli set-status "$info" "invalid-id" "test-status-123" >$log 2>&1
+  $cli set-status "$info" "invalid-id" "test-status-123"
 
   $cli get-no-status "$info" >$std_out 2>$log
   assert "$(cat $std_out)" "$expected_video_id"
@@ -103,11 +103,11 @@ test_can_read_field_in_video() {
   cp "$example_info" "$info"
   std_out=tests/out.log
 
-  $cli read-field "$info" "$expected_video_id" "fieldToNotRemove" >$std_out 2>$log
+  $cli read-field "$info" "$expected_video_id" "fieldToNotRemove" >$std_out
   assert "$(cat $std_out)" "1"
 
   # empty string for unknown fields
-  $cli read-field "$info" "invalid-id" "fieldToNotRemove" >$std_out 2>$log
+  $cli read-field "$info" "invalid-id" "fieldToNotRemove" >$std_out
   assert "$(cat $std_out)" ""
 
   ok

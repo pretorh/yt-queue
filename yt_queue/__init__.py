@@ -3,6 +3,7 @@ from . import file
 from .internal import mapper, yt_dlp_wrapper
 
 VERSION = '0.1.1'
+_fullname = f"yt-queue {VERSION}"
 
 # utils
 
@@ -20,12 +21,12 @@ def _create():
     create(info, url)
 
 def create(info, url):
-    print(f'creating {info} for {url}')
 
     data = {
         'url': url,
     }
     write(info, data)
+    print(f'{info} created')
 
 def _refresh():
     info = sys.argv[2]
@@ -34,14 +35,12 @@ def _refresh():
 def refresh(info):
     data = read(info)
     url = data['url']
-    print(f'refreshing {info} ({url})')
+    print(f'Refreshing {info} ({url})')
     yt_info = yt_dlp_wrapper.extract_info(url)
 
-    print('parsing playlist entries')
     for entry in yt_info['entries']:
         mapper.map_and_merge(entry, data['videos'])
 
-    print(f'updating {info}')
     write(info, data)
 
 def _get_no_status():
@@ -51,9 +50,8 @@ def _get_no_status():
 def get_no_status(info):
     data = read(info)
 
-    print(f'list videos with no status from {info}', file=sys.stderr)
     found = [video for video in data['videos'] if 'status' not in video]
-    print(f'found {len(found)} videos', file=sys.stderr)
+    print(f'Found {len(found)} videos with no status in {info}', file=sys.stderr)
     for video in found:
         print(video['id'])
 
@@ -64,9 +62,8 @@ def _get_status():
 def get_status(info, status):
     data = read(info)
 
-    print(f'list videos with status {status} from {info}', file=sys.stderr)
     found = [video for video in data['videos'] if 'status' in video and video['status'] == status]
-    print(f'found {len(found)} videos', file=sys.stderr)
+    print(f'Found {len(found)} videos with status {status} in {info}', file=sys.stderr)
     for video in found:
         print(video['id'])
 
@@ -77,12 +74,9 @@ def _set_status():
 def set_status(info, video_id, new_status):
     data = read(info)
 
-    print(f'set videos[{video_id}] to status {new_status} in {info}')
-
     found = [video for video in data['videos'] if video['id'] == video_id]
     for video in found:
         video['status'] = new_status
-    print(f'updating {info} (found {len(found)} videos)')
     write(info, data)
 
 def _read_field():
@@ -91,16 +85,15 @@ def _read_field():
 
 def read_field(info, video_id, field):
     data = read(info)
-    print(f'get videos[{video_id}][{field}] from {info}', file=sys.stderr)
 
     found = [video for video in data['videos'] if video['id'] == video_id]
     if any(found) and field in found[0]:
         print(found[0][field])
 
 def cli():
-    print(f'yt-queue {VERSION}', file=sys.stderr)
-
-    if len(sys.argv) == 4 and sys.argv[1] == 'create':
+    if len(sys.argv) == 2 and sys.argv[1] == 'version':
+        print(_fullname)
+    elif len(sys.argv) == 4 and sys.argv[1] == 'create':
         _create()
     elif len(sys.argv) == 3 and sys.argv[1] == 'refresh':
         _refresh()
@@ -112,6 +105,7 @@ def cli():
         _set_status()
     elif len(sys.argv) == 5 and sys.argv[1] == 'read-field':
         _read_field()
-    elif len(sys.argv) > 1:
+    else:
+        print(_fullname)
         print(f'unknown cli arguments {sys.argv}', file=sys.stderr)
         sys.exit(1)
