@@ -74,3 +74,6 @@ def data_dict():
             { 'id': 'idC', 'url': 'https://example.com/videos/c', 'status': 'test' },
         ],
     }
+
+def data_dict_append(data, i, status):
+    data['videos'].append({ 'id': i, 'url': f"https://example.com/videos/{i}", 'status': status })
