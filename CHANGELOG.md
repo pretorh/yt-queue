@@ -1,5 +1,11 @@
 # Changelog
 
+## unreleased
+
+### Added
+
+- api: `filter_videos` function to filter by rules given (currently 'status', 'custom' function)
+
 ## 0.2.0
 
 ### Added
