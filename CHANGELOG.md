@@ -4,7 +4,11 @@
 
 ### Added
 
-- api: `filter_videos` function to filter by rules given (currently 'status', 'custom' function)
+- Api: `filter_videos` function to filter by rules given (currently 'status', 'custom' function)
+
+### Fixed
+
+- Updated `yt-dlp` dependency
 
 ## 0.2.0
 
