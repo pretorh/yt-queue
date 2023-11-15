@@ -1,7 +1,7 @@
 import sys
 from . import file
 from .internal import mapper, yt_dlp_wrapper
-from .filters import filter_by_status
+from .filters import filter_videos
 from .utils.loggers import StdLogger
 
 VERSION = '0.2.0'
@@ -54,7 +54,7 @@ def get_no_status(info, logger=_log):
     _log.formatted_output = True
     data = read(info)
 
-    found = filter_by_status(data, status=None)
+    found = filter_videos(data, { 'status': None })
     logger.info(f'Found {len(found)} videos with no status in {info}')
     for video in found:
         logger.output(video['id'])
@@ -67,7 +67,7 @@ def get_status(info, status, logger=_log):
     _log.formatted_output = True
     data = read(info)
 
-    found = filter_by_status(data, status)
+    found = filter_videos(data, { 'status': status })
     logger.info(f'Found {len(found)} videos with status {status} in {info}')
     for video in found:
         logger.output(video['id'])
