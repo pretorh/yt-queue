@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
-mapfile -t py < <(git ls-files '*.py')
-echo "py files:" "${py[@]}"
+while IFS= read -r file; do py+=("$file"); done < <(git ls-files '*.py')
+echo "${#py[@]} py files:" "${py[@]}"
 python "$(which pylint)" "${py[@]}"
 
-mapfile -t sh < <(git ls-files 'yt-queue' '*.sh')
-echo "sh files:" "${sh[@]}"
+while IFS= read -r file; do sh+=("$file"); done < <(git ls-files 'yt-queue' '*.sh')
+echo "${#sh[@]} sh files:" "${sh[@]}"
 shellcheck "${sh[@]}"
