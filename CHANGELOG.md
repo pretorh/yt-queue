@@ -5,6 +5,7 @@
 ### Added
 
 - Api: `filter_videos` function to filter by rules given (currently 'status', 'custom' function)
+- Api: `cli.argument_parser` to parse `sys.argv` using `argparse`
 
 ### Fixed
 

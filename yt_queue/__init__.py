@@ -1,5 +1,6 @@
 import sys
 from . import file
+from .cli import argument_parser
 from .internal import mapper, yt_dlp_wrapper
 from .filters import filter_videos
 from .utils.loggers import StdLogger
@@ -19,21 +20,12 @@ def write(filename, playlist_data):
 
 _log = StdLogger()
 
-def _create():
-    info = sys.argv[2]
-    url = sys.argv[3]
-    create(info, url)
-
 def create(info, url, logger=_log):
     data = {
         'url': url,
     }
     write(info, data)
     logger.info(f'{info} created')
-
-def _refresh():
-    info = sys.argv[2]
-    refresh(info)
 
 def refresh(info, logger=_log):
     data = read(info)
@@ -46,10 +38,6 @@ def refresh(info, logger=_log):
 
     write(info, data)
 
-def _get_no_status():
-    info = sys.argv[2]
-    get_no_status(info)
-
 def get_no_status(info, logger=_log):
     _log.formatted_output = True
     data = read(info)
@@ -58,10 +46,6 @@ def get_no_status(info, logger=_log):
     logger.info(f'Found {len(found)} videos with no status in {info}')
     for video in found:
         logger.output(video['id'])
-
-def _get_status():
-    [info, status] = sys.argv[2:4]
-    get_status(info, status)
 
 def get_status(info, status, logger=_log):
     _log.formatted_output = True
@@ -72,10 +56,6 @@ def get_status(info, status, logger=_log):
     for video in found:
         logger.output(video['id'])
 
-def _set_status():
-    [info, video_id, new_status] = sys.argv[2:5]
-    set_status(info, video_id, new_status)
-
 def set_status(info, video_id, new_status):
     data = read(info)
 
@@ -83,10 +63,6 @@ def set_status(info, video_id, new_status):
     for video in found:
         video['status'] = new_status
     write(info, data)
-
-def _read_field():
-    [info, video_id, field] = sys.argv[2:5]
-    read_field(info, video_id, field)
 
 def read_field(info, video_id, field, logger=_log):
     _log.formatted_output = True
@@ -97,21 +73,24 @@ def read_field(info, video_id, field, logger=_log):
         logger.output(found[0][field])
 
 def cli():
-    if len(sys.argv) == 2 and sys.argv[1] == 'version':
+    parser = argument_parser()
+    args = parser.parse_args()
+
+    if args.sub_command == 'version':
         _log.output(_fullname)
-    elif len(sys.argv) == 4 and sys.argv[1] == 'create':
-        _create()
-    elif len(sys.argv) == 3 and sys.argv[1] == 'refresh':
-        _refresh()
-    elif len(sys.argv) == 3 and sys.argv[1] == 'get-no-status':
-        _get_no_status()
-    elif len(sys.argv) == 4 and sys.argv[1] == 'get-status':
-        _get_status()
-    elif len(sys.argv) == 5 and sys.argv[1] == 'set-status':
-        _set_status()
-    elif len(sys.argv) == 5 and sys.argv[1] == 'read-field':
-        _read_field()
+    elif args.sub_command == 'create':
+        create(args.file, args.url)
+    elif args.sub_command == 'refresh':
+        refresh(args.file)
+    elif args.sub_command == 'get-no-status':
+        get_no_status(args.file)
+    elif args.sub_command == 'get-status':
+        get_status(args.file, args.status)
+    elif args.sub_command == 'set-status':
+        set_status(args.file, args.video_id, args.status)
+    elif args.sub_command == 'read-field':
+        read_field(args.file, args.video_id, args.field_name)
     else:
         _log.info(_fullname)
-        _log.warning(f'unknown cli arguments {sys.argv}')
+        _log.warning(f'Cli argument parsing failed {sys.argv} {args}')
         sys.exit(1)
