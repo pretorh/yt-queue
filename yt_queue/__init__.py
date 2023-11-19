@@ -5,7 +5,7 @@ from .internal import mapper, yt_dlp_wrapper
 from .filters import filter_videos
 from .utils.loggers import StdLogger
 
-VERSION = '0.2.0'
+VERSION = '0.3.0'
 _fullname = f"yt-queue {VERSION}"
 
 # utils
