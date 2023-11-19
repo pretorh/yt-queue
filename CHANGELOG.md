@@ -4,6 +4,7 @@
 
 ### Added
 
+- CLI: `--help` options and subcommand descriptions
 - Api: `filter_videos` function to filter by rules given (currently 'status', 'custom' function)
 - Api: `cli.argument_parser` to parse `sys.argv` using `argparse`
 
