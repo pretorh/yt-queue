@@ -4,7 +4,7 @@
 
 ### Fixed
 
-- Ignnore video entries without urls (crash fix)
+- Ignore video entries without urls (crash fix)
 
 ## 0.3.0
 
