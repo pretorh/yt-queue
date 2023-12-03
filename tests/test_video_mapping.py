@@ -12,6 +12,12 @@ def test_ignore_none_entries():
     video = map_entry_to_video(entry)
     assert video is None
 
+def test_ignore_no_url():
+    entry = response_video_playlist_info(vid='id1')
+    del entry['url']
+    video = map_entry_to_video(entry)
+    assert video is None
+
 def test_map_duration():
     entry = response_video_playlist_info(vid='id1')
     video = map_entry_to_video(entry)

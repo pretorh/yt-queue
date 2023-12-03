@@ -1,5 +1,11 @@
 # Changelog
 
+## unreleased
+
+### Fixed
+
+- Ignnore video entries without urls (crash fix)
+
 ## 0.3.0
 
 ### Added
