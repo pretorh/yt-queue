@@ -1,6 +1,8 @@
 def map_entry_to_video(entry):
     if entry is None:
         return None
+    if 'url' not in entry:
+        return None
 
     return {
             'id': entry['id'],
