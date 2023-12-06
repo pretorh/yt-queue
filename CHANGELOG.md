@@ -1,5 +1,11 @@
 # Changelog
 
+## unreleased
+
+### Added
+
+- Last `refreshed` timestamp
+
 ## 0.3.1
 
 ### Fixed

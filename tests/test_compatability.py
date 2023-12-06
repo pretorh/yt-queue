@@ -13,3 +13,5 @@ class TestEmptyFile:
         assert data['url'] == "https://example.com/playlist/1"
     def test_empty_videos(self, data):
         assert len(data['videos']) == 0
+    def test_0_last_refresh(self, data):
+        assert data['refreshed'] == 0

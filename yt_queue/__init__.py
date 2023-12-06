@@ -1,4 +1,5 @@
 import sys
+from datetime import datetime
 from . import file
 from .cli import argument_parser
 from .internal import mapper, yt_dlp_wrapper
@@ -36,6 +37,7 @@ def refresh(info, logger=_log):
     for entry in yt_info['entries']:
         mapper.map_and_merge(entry, data['videos'])
 
+    data['refreshed'] = datetime.utcnow().timestamp()
     write(info, data)
 
 def get_no_status(info, logger=_log):

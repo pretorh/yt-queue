@@ -19,3 +19,12 @@ def test_refresh_skips_none_videos(path_to_created_file, monkeypatch):
     yt_queue.refresh(file)
     data = yt_queue.read(file)
     assert len(data['videos']) == 3
+
+def test_saves_timestamp(path_to_created_file, monkeypatch):
+    file = path_to_created_file
+
+    mock_yt_dlp(monkeypatch, extract_info=response_extract_info())
+
+    yt_queue.refresh(file)
+    data = yt_queue.read(file)
+    assert data['refreshed'] > 0
