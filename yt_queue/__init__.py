@@ -63,7 +63,7 @@ def refresh(info, logger=_log):
     for entry in yt_info['entries']:
         mapper.map_and_merge(entry, data['videos'])
 
-    data['refreshed'] = datetime.utcnow().timestamp()
+    data['refreshed'] = datetime.now().timestamp()
     write(info, data)
 
 def get_no_status(info, logger=_log):
