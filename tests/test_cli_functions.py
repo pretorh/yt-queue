@@ -1,7 +1,15 @@
 from pathlib import Path
 import json
+import pytest
 import yt_queue
 from .mocks import mock_yt_dlp, response_extract_info, data_dict
+
+@pytest.fixture(name='file_with_some_data')
+def create_info_file(tmp_path):
+    file = tmp_path / 'info.json'
+    with open(file, 'w', encoding='utf-8') as f:
+        json.dump(data_dict(), f)
+    return file
 
 def test_can_create(tmp_path):
     info = Path(tmp_path, 'info.json')
@@ -21,10 +29,21 @@ def test_can_refresh(tmp_path, monkeypatch):
     data = yt_queue.read(file)
     assert len(data['videos']) == 3
 
-def test_can_filter_by_status(tmp_path, capsys):
-    file = tmp_path / 'info.json'
-    with open(file, 'w', encoding='utf-8') as f:
-        json.dump(data_dict(), f)
+def test_can_output_info(file_with_some_data, capsys):
+    file = file_with_some_data
+
+    yt_queue.show_info(file)
+    captured = capsys.readouterr()
+    # the output is not _fully_ parsable, but contains:
+    assert captured.out.find("https://example.com/playlist/1") != -1
+    assert captured.out.find("Last refreshed: ") != -1
+    assert captured.out.find("3 videos") != -1
+    assert captured.out.find("1 distinct status:") != -1
+    assert captured.out.find("2 with test") != -1
+    assert captured.out.find("1 with no status") != -1
+
+def test_can_filter_by_status(file_with_some_data, capsys):
+    file = file_with_some_data
 
     yt_queue.get_no_status(file)
     captured = capsys.readouterr()
@@ -34,10 +53,8 @@ def test_can_filter_by_status(tmp_path, capsys):
     captured = capsys.readouterr()
     assert captured.out == "idB\nidC\n"
 
-def test_can_set_status(tmp_path, capsys):
-    file = tmp_path / 'info.json'
-    with open(file, 'w', encoding='utf-8') as f:
-        json.dump(data_dict(), f)
+def test_can_set_status(file_with_some_data, capsys):
+    file = file_with_some_data
 
     yt_queue.set_status(file, "idB", "new-status")
     capsys.readouterr()
@@ -49,10 +66,8 @@ def test_can_set_status(tmp_path, capsys):
     captured = capsys.readouterr()
     assert captured.out == "idC\n"
 
-def test_can_read_field_of_video(tmp_path, capsys):
-    file = tmp_path / 'info.json'
-    with open(file, 'w', encoding='utf-8') as f:
-        json.dump(data_dict(), f)
+def test_can_read_field_of_video(file_with_some_data, capsys):
+    file = file_with_some_data
 
     yt_queue.read_field(file, "idA", "url")
     captured = capsys.readouterr()
