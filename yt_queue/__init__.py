@@ -28,6 +28,32 @@ def create(info, url, logger=_log):
     write(info, data)
     logger.info(f'{info} created')
 
+def show_info(info, logger=_log):
+    data = read(info)
+    logger.info(f"URL: {data['url']}")
+
+    local_time_last_refresh = datetime.fromtimestamp(data['refreshed']).astimezone().isoformat()
+    logger.output(f"Last refreshed: {local_time_last_refresh}")
+
+    logger.output(f"{len(data['videos'])} videos")
+
+    no_status = 0
+    status_counts = {}
+    for video in data['videos']:
+        if 'status' in video:
+            status = video['status']
+            if status in status_counts:
+                status_counts[status] += 1
+            else:
+                status_counts[status] = 1
+        else:
+            no_status += 1
+
+    logger.output(f"{len(status_counts.keys())} distinct status:")
+    for status, count in status_counts.items():
+        logger.output(f"{count} with {status}")
+    logger.output(f"{no_status} with no status")
+
 def refresh(info, logger=_log):
     data = read(info)
     url = data['url']
@@ -82,6 +108,8 @@ def cli():
         _log.output(_fullname)
     elif args.sub_command == 'create':
         create(args.file, args.url)
+    elif args.sub_command == 'info':
+        show_info(args.file)
     elif args.sub_command == 'refresh':
         refresh(args.file)
     elif args.sub_command == 'get-no-status':

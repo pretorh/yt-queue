@@ -29,6 +29,19 @@ def test_can_refresh(tmp_path, monkeypatch):
     data = yt_queue.read(file)
     assert len(data['videos']) == 3
 
+def test_can_output_info(file_with_some_data, capsys):
+    file = file_with_some_data
+
+    yt_queue.show_info(file)
+    captured = capsys.readouterr()
+    # the output is not _fully_ parsable, but contains:
+    assert captured.out.find("https://example.com/playlist/1") != -1
+    assert captured.out.find("Last refreshed: ") != -1
+    assert captured.out.find("3 videos") != -1
+    assert captured.out.find("1 distinct status:") != -1
+    assert captured.out.find("2 with test") != -1
+    assert captured.out.find("1 with no status") != -1
+
 def test_can_filter_by_status(file_with_some_data, capsys):
     file = file_with_some_data
 

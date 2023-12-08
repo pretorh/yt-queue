@@ -63,6 +63,12 @@ test_can_refresh_info() {
   ok
 }
 
+test_can_show_info() {
+  $cli info "$info" >$log 2>&1
+  # not fully parsable
+  ok
+}
+
 test_refresh_only_adds_new_item_does_not_remove_old_or_readd_existing() {
   cp "$example_info" "$info"
 
@@ -117,6 +123,7 @@ test_cli_is_executable
 test_cli_fails_for_invalid_params
 test_can_create_info
 test_can_refresh_info
+test_can_show_info
 test_refresh_only_adds_new_item_does_not_remove_old_or_readd_existing
 test_can_manage_item_status
 test_can_read_field_in_video

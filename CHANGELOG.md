@@ -4,6 +4,7 @@
 
 ### Added
 
+- CLI: `info` command to show info and statistics
 - Last `refreshed` timestamp
 
 ## 0.3.1

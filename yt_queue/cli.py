@@ -11,6 +11,7 @@ def argument_parser():
 
     _add_create_sub_command(subparsers)
     _add_refresh_sub_command(subparsers)
+    _add_info_sub_command(subparsers)
     _add_get_no_status_sub_command(subparsers)
     _add_get_status_sub_command(subparsers)
     _add_set_status_sub_command(subparsers)
@@ -28,6 +29,11 @@ def _add_refresh_sub_command(subparsers):
     parser_refresh = subparsers.add_parser('refresh',
         help="Refresh the playlist, updating the videos in the given file")
     parser_refresh.add_argument('file')
+
+def _add_info_sub_command(subparsers):
+    parser_info = subparsers.add_parser('info',
+        help="Show info and statistics about the file and videos")
+    parser_info.add_argument('file')
 
 def _add_get_no_status_sub_command(subparsers):
     parser_get_no_statue = subparsers.add_parser('get-no-status',
