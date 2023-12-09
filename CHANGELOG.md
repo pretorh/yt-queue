@@ -1,11 +1,11 @@
 # Changelog
 
-## unreleased
+## 0.4.0
 
 ### Added
 
 - CLI: `info` command to show info and statistics
-- Last `refreshed` timestamp
+- Saving last successful `refreshed` timestamp
 
 ## 0.3.1
 
