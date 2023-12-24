@@ -29,6 +29,7 @@ def _add_refresh_sub_command(subparsers):
     parser_refresh = subparsers.add_parser('refresh',
         help="Refresh the playlist, updating the videos in the given file")
     parser_refresh.add_argument('file')
+    parser_refresh.add_argument('--only-if-older', dest='only_if_older')
 
 def _add_info_sub_command(subparsers):
     parser_info = subparsers.add_parser('info',

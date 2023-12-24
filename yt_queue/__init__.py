@@ -120,7 +120,7 @@ def cli():
     elif args.sub_command == 'info':
         show_info(args.file)
     elif args.sub_command == 'refresh':
-        refresh(args.file)
+        refresh(args.file, only_if_older=args.only_if_older)
     elif args.sub_command == 'get-no-status':
         get_no_status(args.file)
     elif args.sub_command == 'get-status':
