@@ -1,5 +1,5 @@
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from . import file
 from .cli import argument_parser
 from .internal import mapper, yt_dlp_wrapper
@@ -54,9 +54,17 @@ def show_info(info, logger=_log):
         logger.output(f"{count} with {status}")
     logger.output(f"{no_status} with no status")
 
-def refresh(info, logger=_log):
+def refresh(info, logger=_log, only_if_older=None):
     data = read(info)
     url = data['url']
+
+    if only_if_older is not None:
+        last_refreshed = data['refreshed']
+        since_last_refresh = timedelta(seconds = datetime.now().timestamp() - last_refreshed)
+        if only_if_older == '1hour' and since_last_refresh < timedelta(hours=1):
+            logger.info(f'Skip refreshing {info} ({url}), still within {only_if_older} range')
+            return None
+
     logger.info(f'Refreshing {info} ({url})')
     yt_info = yt_dlp_wrapper.extract_info(url, yt_dlp_wrapper.ProgressLogger(logger))
 
@@ -65,6 +73,7 @@ def refresh(info, logger=_log):
 
     data['refreshed'] = datetime.now().timestamp()
     write(info, data)
+    return data['refreshed']
 
 def get_no_status(info, logger=_log):
     _log.formatted_output = True

@@ -1,5 +1,11 @@
 # Changelog
 
+## unreleased
+
+### Added
+
+- CLI: `only_if_older` option to refresh to skip refreshing if recently refreshed
+
 ## 0.4.0
 
 ### Added
