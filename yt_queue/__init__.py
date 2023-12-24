@@ -61,8 +61,10 @@ def refresh(info, logger=_log, only_if_older=None):
 
     if only_if_older is not None:
         last_refreshed = data['refreshed']
+        local_time_last_refresh = datetime.fromtimestamp(last_refreshed).astimezone().isoformat()
         if not is_stale(last_refreshed, only_if_older):
-            logger.info(f'Skip refreshing {info} ({url}), still within {only_if_older} range')
+            logger.info(f'{info} was refreshed at {local_time_last_refresh}, ' +
+                        f'which is still within the {only_if_older} range')
             return None
 
     logger.info(f'Refreshing {info} ({url})')
