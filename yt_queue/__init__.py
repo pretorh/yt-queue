@@ -5,6 +5,7 @@ from .cli import argument_parser
 from .internal import mapper, yt_dlp_wrapper
 from .filters import filter_videos
 from .utils.loggers import StdLogger
+from .utils.time import is_stale
 
 VERSION = '0.4.0'
 _fullname = f"yt-queue {VERSION}"
@@ -54,9 +55,18 @@ def show_info(info, logger=_log):
         logger.output(f"{count} with {status}")
     logger.output(f"{no_status} with no status")
 
-def refresh(info, logger=_log):
+def refresh(info, logger=_log, only_if_older=None):
     data = read(info)
     url = data['url']
+
+    if only_if_older is not None:
+        last_refreshed = data['refreshed']
+        local_time_last_refresh = datetime.fromtimestamp(last_refreshed).astimezone().isoformat()
+        if not is_stale(last_refreshed, only_if_older):
+            logger.info(f'{info} was refreshed at {local_time_last_refresh}, ' +
+                        f'which is still within the {only_if_older} range')
+            return None
+
     logger.info(f'Refreshing {info} ({url})')
     yt_info = yt_dlp_wrapper.extract_info(url, yt_dlp_wrapper.ProgressLogger(logger))
 
@@ -65,6 +75,7 @@ def refresh(info, logger=_log):
 
     data['refreshed'] = datetime.now().timestamp()
     write(info, data)
+    return data['refreshed']
 
 def get_no_status(info, logger=_log):
     _log.formatted_output = True
@@ -111,7 +122,7 @@ def cli():
     elif args.sub_command == 'info':
         show_info(args.file)
     elif args.sub_command == 'refresh':
-        refresh(args.file)
+        refresh(args.file, only_if_older=args.only_if_older)
     elif args.sub_command == 'get-no-status':
         get_no_status(args.file)
     elif args.sub_command == 'get-status':
