@@ -4,7 +4,7 @@
 
 ### Added
 
-- CLI: add `--only-if-older=<time>` to `refresh` sub command to skip if recently refresed
+- CLI: add `--only-if-older=<time>` to `refresh` sub command to skip if recently refreshed
 - api: `only_if_older` option to refresh to skip refreshing if recently refreshed
 
 ## 0.4.0
