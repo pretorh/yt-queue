@@ -1,10 +1,11 @@
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime
 from . import file
 from .cli import argument_parser
 from .internal import mapper, yt_dlp_wrapper
 from .filters import filter_videos
 from .utils.loggers import StdLogger
+from .utils.time import is_stale
 
 VERSION = '0.4.0'
 _fullname = f"yt-queue {VERSION}"
@@ -60,8 +61,7 @@ def refresh(info, logger=_log, only_if_older=None):
 
     if only_if_older is not None:
         last_refreshed = data['refreshed']
-        since_last_refresh = timedelta(seconds = datetime.now().timestamp() - last_refreshed)
-        if only_if_older == '1hour' and since_last_refresh < timedelta(hours=1):
+        if not is_stale(last_refreshed, only_if_older):
             logger.info(f'Skip refreshing {info} ({url}), still within {only_if_older} range')
             return None
 
