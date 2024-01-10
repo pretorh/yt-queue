@@ -89,17 +89,17 @@ test_can_manage_item_status() {
   cp "$example_info" "$info"
   std_out=tests/out.log
 
-  $cli get-no-status "$info" >$std_out 2>$log
+  $cli filter --no-status "$info" >$std_out 2>$log
   assert "$(cat $std_out)" \
     "invalid-id
 $expected_video_id"
 
   $cli set-status "$info" "invalid-id" "test-status-123"
 
-  $cli get-no-status "$info" >$std_out 2>$log
+  $cli filter --no-status "$info" >$std_out 2>$log
   assert "$(cat $std_out)" "$expected_video_id"
 
-  $cli get-status "$info" test-status-123 >$std_out 2>$log
+  $cli filter "$info" --status=test-status-123 >$std_out 2>$log
   assert "$(cat $std_out)" "invalid-id"
 
   ok

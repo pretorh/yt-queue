@@ -77,23 +77,31 @@ def refresh(info, logger=_log, only_if_older=None):
     write(info, data)
     return data['refreshed']
 
-def get_no_status(info, logger=_log):
+def list_filtered_ids(info, options, logger=_log):
     _log.formatted_output = True
     data = read(info)
+    found = data['videos']
 
-    found = filter_videos(data, { 'status': None })
-    logger.info(f'Found {len(found)} videos with no status in {info}')
+    only_no_status = options.get('only_no_status')
+    status = options.get('status')
+
+    if only_no_status:
+        found = filter_videos({ 'videos': found }, { 'status': None })
+        logger.info(f'Found {len(found)} videos with no status')
+    if status is not None:
+        found = filter_videos({ 'videos': found }, { 'status': status })
+        logger.info(f'Found {len(found)} videos with status {status}')
+
     for video in found:
         logger.output(video['id'])
+
+def get_no_status(info, logger=_log):
+    logger.warning('get-no-status is deprecated, use filter --no-status')
+    list_filtered_ids(info, {'only_no_status': True})
 
 def get_status(info, status, logger=_log):
-    _log.formatted_output = True
-    data = read(info)
-
-    found = filter_videos(data, { 'status': status })
-    logger.info(f'Found {len(found)} videos with status {status} in {info}')
-    for video in found:
-        logger.output(video['id'])
+    logger.warning(f'get-status is deprecated, use filter --status {status}')
+    list_filtered_ids(info, {'status': status})
 
 def set_status(info, video_id, new_status):
     data = read(info)
@@ -123,6 +131,11 @@ def cli():
         show_info(args.file)
     elif args.sub_command == 'refresh':
         refresh(args.file, only_if_older=args.only_if_older)
+    elif args.sub_command == 'filter':
+        list_filtered_ids(args.file, {
+            'only_no_status': args.no_status,
+            'status': args.status,
+        })
     elif args.sub_command == 'get-no-status':
         get_no_status(args.file)
     elif args.sub_command == 'get-status':
