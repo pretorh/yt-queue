@@ -53,6 +53,14 @@ def test_can_filter_by_status(file_with_some_data, capsys):
     captured = capsys.readouterr()
     assert captured.out == "idB\nidC\n"
 
+    # deprecated still works
+    yt_queue.get_no_status(file)
+    captured = capsys.readouterr()
+    assert captured.out == "idA\n"
+    yt_queue.get_status(file, "test")
+    captured = capsys.readouterr()
+    assert captured.out == "idB\nidC\n"
+
 def test_can_set_status(file_with_some_data, capsys):
     file = file_with_some_data
 
