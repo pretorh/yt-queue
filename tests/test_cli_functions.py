@@ -61,6 +61,13 @@ def test_can_filter_by_status(file_with_some_data, capsys):
     captured = capsys.readouterr()
     assert captured.out == "idB\nidC\n"
 
+def test_can_filter_nothing_filtered_by_default(file_with_some_data, capsys):
+    file = file_with_some_data
+
+    yt_queue.list_filtered_ids(file, {})
+    captured = capsys.readouterr()
+    assert captured.out == "idA\nidB\nidC\n"
+
 def test_can_set_status(file_with_some_data, capsys):
     file = file_with_some_data
 
