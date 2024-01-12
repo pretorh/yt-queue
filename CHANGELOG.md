@@ -1,5 +1,14 @@
 # Changelog
 
+## unreleased
+
+### Deprecated
+
+- CLI: `get-no-status`: use `filter --no-status` instead
+- CLI: `get-status`: use `filter ... --status=...` instead
+- api: `get_no_status`: use `list_filtered_ids(..., {'only_no_status': True})` instead
+- api: `get_status`: use `list_filtered_ids(..., {'status': ...})` instead
+
 ## 0.5.0
 
 ### Added
