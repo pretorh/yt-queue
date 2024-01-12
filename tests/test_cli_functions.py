@@ -45,7 +45,7 @@ def test_can_output_info(file_with_some_data, capsys):
 def test_can_filter_by_status(file_with_some_data, capsys):
     file = file_with_some_data
 
-    yt_queue.list_filtered_ids(file, {'only_no_status': True})
+    yt_queue.list_filtered_ids(file, {'status': None})
     captured = capsys.readouterr()
     assert captured.out == "idA\n"
 
