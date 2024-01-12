@@ -119,6 +119,12 @@ def read_field(info, video_id, field, logger=_log):
     if any(found) and field in found[0]:
         logger.output(found[0][field])
 
+def _filter_options_from_arg_parse(args):
+    return {
+        'only_no_status': args.no_status,
+        'status': args.status,
+    }
+
 def cli():
     parser = argument_parser()
     args = parser.parse_args()
@@ -132,10 +138,7 @@ def cli():
     elif args.sub_command == 'refresh':
         refresh(args.file, only_if_older=args.only_if_older)
     elif args.sub_command == 'filter':
-        list_filtered_ids(args.file, {
-            'only_no_status': args.no_status,
-            'status': args.status,
-        })
+        list_filtered_ids(args.file, _filter_options_from_arg_parse(args))
     elif args.sub_command == 'get-no-status':
         get_no_status(args.file)
     elif args.sub_command == 'get-status':
