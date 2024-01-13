@@ -80,24 +80,15 @@ def refresh(info, logger=_log, only_if_older=None):
 def list_filtered_ids(info, options, logger=_log):
     _log.formatted_output = True
     data = read(info)
-    found = data['videos']
 
-    only_no_status = options.get('only_no_status')
-    status = options.get('status')
-
-    if only_no_status:
-        found = filter_videos({ 'videos': found }, { 'status': None })
-        logger.info(f'Found {len(found)} videos with no status')
-    if status is not None:
-        found = filter_videos({ 'videos': found }, { 'status': status })
-        logger.info(f'Found {len(found)} videos with status {status}')
-
+    found = filter_videos(data, options)
+    logger.info(f'Found {len(found)} matching videos')
     for video in found:
         logger.output(video['id'])
 
 def get_no_status(info, logger=_log):
     logger.warning('get-no-status is deprecated, use filter --no-status')
-    list_filtered_ids(info, {'only_no_status': True})
+    list_filtered_ids(info, {'status': None})
 
 def get_status(info, status, logger=_log):
     logger.warning(f'get-status is deprecated, use filter --status {status}')
@@ -119,6 +110,15 @@ def read_field(info, video_id, field, logger=_log):
     if any(found) and field in found[0]:
         logger.output(found[0][field])
 
+def _filter_options_from_arg_parse(args):
+    options = {}
+    if args.status:
+        options['status'] = args.status
+    elif args.no_status:
+        options['status'] = None
+
+    return options
+
 def cli():
     parser = argument_parser()
     args = parser.parse_args()
@@ -132,10 +132,7 @@ def cli():
     elif args.sub_command == 'refresh':
         refresh(args.file, only_if_older=args.only_if_older)
     elif args.sub_command == 'filter':
-        list_filtered_ids(args.file, {
-            'only_no_status': args.no_status,
-            'status': args.status,
-        })
+        list_filtered_ids(args.file, _filter_options_from_arg_parse(args))
     elif args.sub_command == 'get-no-status':
         get_no_status(args.file)
     elif args.sub_command == 'get-status':
