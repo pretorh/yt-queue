@@ -8,11 +8,11 @@ tl;dr:
 ```sh
 yt-queue create <name.ytq.json> <url>
 yt-queue refresh <name.ytq.json> --only-if-older=1day
-yt-queue filter --no-status <name.ytq.json> 
+yt-queue filter --no-status <name.ytq.json>
 yt-queue read-field <name.ytq.json> <video-id> url
 yt-queue read-field <name.ytq.json> <video-id> title
 yt-queue set-status <name.ytq.json> <video-id> <status>
-yt-queue filter --status=<status> <name.ytq.json> 
+yt-queue filter --status=<status> <name.ytq.json>
 ```
 
 See `yt-queue -h` or `yt-queue <subcommand> -h` for details.

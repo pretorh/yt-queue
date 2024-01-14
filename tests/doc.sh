@@ -10,7 +10,7 @@ if [ "$1" = "doc" ] ; then
     sed 's#".example_playlist"#<url>#g' | \
     sed 's#".example_video_id"#<video-id>#g' | \
     sed 's#watched#<status>#g' | \
-    sed 's#|.*##g'
+    sed 's# |.*##g'
   exit 0
 else
   export PATH=".:$PATH"
