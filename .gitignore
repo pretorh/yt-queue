@@ -7,3 +7,4 @@ dist/
 build/
 *.egg-info
 tests/info.json
+readme-example.ytq.json
