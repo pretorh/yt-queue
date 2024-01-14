@@ -18,4 +18,6 @@ else
 fi
 YT_QUEUE=yt-queue tests/cli.sh
 
+YT_QUEUE=yt-queue tests/doc.sh
+
 deactivate
