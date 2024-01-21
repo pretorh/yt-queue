@@ -52,6 +52,19 @@ def test_filter_title_regex():
     assert filtered[0]['id'] == 'idA'
     assert filtered[1]['id'] == 'idC'
 
+def test_filter_title_simple_matches_as_regex():
+    data = data_dict()
+
+    filtered = yt_queue.filters.filter_videos(data, { 'title': 'A' })
+    assert len(filtered) == 1
+    assert filtered[0]['id'] == 'idA'
+    filtered = yt_queue.filters.filter_videos(data, { 'title': 'Video' })
+    assert len(filtered) == 1
+    assert filtered[0]['id'] == 'idA'
+    filtered = yt_queue.filters.filter_videos(data, { 'title': 'deo' })
+    assert len(filtered) == 1
+    assert filtered[0]['id'] == 'idA'
+
 def test_filter_min_duration():
     data = data_dict()
 

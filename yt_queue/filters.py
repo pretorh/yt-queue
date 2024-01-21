@@ -28,7 +28,7 @@ def _filter_by_title(videos, title_pattern):
     title_re = re.compile(title_pattern)
 
     for video in videos:
-        if 'title' in video and title_re.match(video['title']):
+        if 'title' in video and title_re.search(video['title']):
             yield video
 
 def _filter_by_duration(videos, min_duration, max_duration):
