@@ -5,6 +5,8 @@
 ### Added
 
 - api: `title` option for `filter_videos` to only return videos that matches the regular expression
+- api: `min-duration` option for `filter_videos` to only return videos with a duration greater or equal the value
+- api: `max-duration` option for `filter_videos` to only return videos with a duration less or equal the value
 
 ## 0.6.0
 

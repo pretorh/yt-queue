@@ -44,6 +44,22 @@ def test_filter_title_regex():
     assert filtered[0]['id'] == 'idA'
     assert filtered[1]['id'] == 'idC'
 
+def test_filter_min_duration():
+    data = data_dict()
+
+    filtered = yt_queue.filters.filter_videos(data, { 'min-duration': 90 })
+    assert len(filtered) == 2
+    assert filtered[0]['id'] == 'idA'
+    assert filtered[1]['id'] == 'idC'
+
+def test_filter_max_duration():
+    data = data_dict()
+
+    filtered = yt_queue.filters.filter_videos(data, { 'max-duration': 120 })
+    assert len(filtered) == 2
+    assert filtered[0]['id'] == 'idA'
+    assert filtered[1]['id'] == 'idB'
+
 def test_filter_by_custom_check():
     data = data_dict()
 
