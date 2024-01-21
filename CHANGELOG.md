@@ -4,9 +4,12 @@
 
 ### Added
 
-- api: `title` option for `filter_videos` to only return videos that matches the regular expression
-- api: `min-duration` option for `filter_videos` to only return videos with a duration greater or equal the value
-- api: `max-duration` option for `filter_videos` to only return videos with a duration less or equal the value
+- CLI: `filter --title <regular expression>` to only return videos that matches the regular expression
+- CLI: `filter --min-duration <seconds>` to only return videos with a duration greater or equal the value
+- CLI: `filter --max-duration <seconds>` to only return videos with a duration less or equal the value
+- api: `title` option for `filter_videos`
+- api: `min-duration` option for `filter_videos`
+- api: `max-duration` option for `filter_videos`
 
 ## 0.6.0
 

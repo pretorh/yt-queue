@@ -116,6 +116,12 @@ def _filter_options_from_arg_parse(args):
         options['status'] = args.status
     elif args.no_status:
         options['status'] = None
+    if args.max_duration:
+        options['max-duration'] = args.max_duration
+    if args.min_duration:
+        options['min-duration'] = args.min_duration
+    if args.title:
+        options['title'] = args.title
 
     return options
 

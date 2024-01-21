@@ -15,6 +15,14 @@ yt-queue set-status <name.ytq.json> <video-id> <status>
 yt-queue filter --status=<status> <name.ytq.json>
 ```
 
+more filter options:
+
+```sh
+yt-queue filter --title "test video" <name.ytq.json>
+yt-queue filter --min-duration 3 <name.ytq.json>
+yt-queue filter --max-duration 11 <name.ytq.json>
+```
+
 See `yt-queue -h` or `yt-queue <subcommand> -h` for details.
 
 ### output
