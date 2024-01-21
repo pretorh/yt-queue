@@ -1,5 +1,11 @@
 # Changelog
 
+## unreleased
+
+### Added
+
+- api: `title` option for `filter_videos` to only return videos that matches the regular expression
+
 ## 0.6.0
 
 ### Deprecated

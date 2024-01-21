@@ -25,6 +25,25 @@ def test_filter_by_no_status():
     assert len(filtered) == 1
     assert filtered[0]['id'] == 'idA'
 
+def test_filter_title():
+    data = data_dict()
+
+    filtered = yt_queue.filters.filter_videos(data, { 'title': 'Video A' })
+    assert len(filtered) == 1
+    assert filtered[0]['id'] == 'idA'
+
+def test_filter_title_regex():
+    data = data_dict()
+
+    filtered = yt_queue.filters.filter_videos(data, { 'title': '^E.*B$' })
+    assert len(filtered) == 1
+    assert filtered[0]['id'] == 'idB'
+
+    filtered = yt_queue.filters.filter_videos(data, { 'title': '^[^E]' })
+    assert len(filtered) == 2
+    assert filtered[0]['id'] == 'idA'
+    assert filtered[1]['id'] == 'idC'
+
 def test_filter_by_custom_check():
     data = data_dict()
 

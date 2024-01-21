@@ -1,8 +1,12 @@
+import re
+
 def filter_videos(data, filters):
     videos = data['videos']
 
     if 'status' in filters:
         videos = _filter_by_status(videos, filters['status'])
+    if 'title' in filters:
+        videos = _filter_by_title(videos, filters['title'])
     if 'custom' in filters:
         videos = _filter_by_custom(videos, filters['custom'])
 
@@ -13,6 +17,13 @@ def _filter_by_status(videos, status):
         if 'status' in video and video['status'] == status:
             yield video
         if 'status' not in video and status is None:
+            yield video
+
+def _filter_by_title(videos, title_pattern):
+    title_re = re.compile(title_pattern)
+
+    for video in videos:
+        if 'title' in video and title_re.match(video['title']):
             yield video
 
 def _filter_by_custom(videos, fn):
