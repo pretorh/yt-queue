@@ -69,9 +69,26 @@ def data_dict():
     return {
         'url': 'https://example.com/playlist/1',
         'videos': [
-            { 'id': 'idA', 'url': 'https://example.com/videos/a' },
-            { 'id': 'idB', 'url': 'https://example.com/videos/b', 'status': 'test' },
-            { 'id': 'idC', 'url': 'https://example.com/videos/c', 'status': 'test' },
+            {
+                'id': 'idA',
+                'url': 'https://example.com/videos/a',
+                'title': 'Video A',
+                'duration': 120,
+            },
+            {
+                'id': 'idB',
+                'url': 'https://example.com/videos/b',
+                'title': 'Example B',
+                'status': 'test',
+                'duration': 59,
+            },
+            {
+                'id': 'idC',
+                'url': 'https://example.com/videos/c',
+                'title': 'Test C',
+                'status': 'test',
+                'duration': 1398,
+            },
         ],
     }
 

@@ -34,3 +34,11 @@ yt-queue read-field readme-example.ytq.json "$example_video_id" title
 yt-queue set-status readme-example.ytq.json "$example_video_id" watched
 yt-queue filter --status=watched readme-example.ytq.json | \
   grep "$example_video_id"
+
+# more filter options
+yt-queue filter --title "test video" readme-example.ytq.json | \
+  grep "$example_video_id"
+yt-queue filter --min-duration 3 readme-example.ytq.json | \
+  grep "$example_video_id"
+yt-queue filter --max-duration 11 readme-example.ytq.json | \
+  grep "$example_video_id"
