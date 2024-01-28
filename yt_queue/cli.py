@@ -61,12 +61,11 @@ def _add_filter_sub_command(subparsers):
     status.add_argument('--status')
     status.add_argument('--no-status', action='store_true')
 
-    # should add parsing tests for this in #25
-    status.add_argument('--min-duration', type=int,
+    parser_filter.add_argument('--min-duration', type=int,
                         help="Return only videos with duration >= MIN_DURATION")
-    status.add_argument('--max-duration', type=int,
+    parser_filter.add_argument('--max-duration', type=int,
                         help="Return only videos with duration <= MAX_DURATION")
-    status.add_argument('--title',
+    parser_filter.add_argument('--title',
                         help="Return only videos with a title matching the regular expression")
 
 def _add_set_status_sub_command(subparsers):
