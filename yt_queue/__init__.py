@@ -125,9 +125,9 @@ def _filter_options_from_arg_parse(args):
 
     return options
 
-def cli():
+def cli(argv=sys.argv[1:]):
     parser = argument_parser()
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     if args.sub_command == 'version':
         _log.output(_fullname)
