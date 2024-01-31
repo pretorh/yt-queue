@@ -41,3 +41,20 @@ def test_filter_title(file_with_some_data, capsys):
     cli(f"filter {file_with_some_data} --title {regex}".split())
     captured = capsys.readouterr()
     assert captured.out == "idB\nidC\n"
+
+def test_filter_mutex_status_no_status(file_with_some_data):
+    with pytest.raises(SystemExit):
+        cli(f"filter {file_with_some_data} --no-status --status test".split())
+
+def test_filter_all(file_with_some_data, capsys):
+    regex = '[BC]$'
+    cli([
+        "filter",
+        f"{file_with_some_data}",
+        "--title",          f"{regex}",
+        "--min-duration",   "60",
+        "--max-duration",   "1800",
+        "--status",         "test",
+    ])
+    captured = capsys.readouterr()
+    assert captured.out == "idC\n"
