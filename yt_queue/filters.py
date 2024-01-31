@@ -33,7 +33,7 @@ def _filter_by_title(videos, title_pattern):
 
 def _filter_by_duration(videos, min_duration, max_duration):
     for video in videos:
-        if 'duration' in video:
+        if 'duration' in video and video['duration'] is not None:
             if video['duration'] >= min_duration and video['duration'] <= max_duration:
                 yield video
 

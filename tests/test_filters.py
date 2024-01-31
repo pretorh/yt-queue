@@ -81,9 +81,12 @@ def test_filter_max_duration():
     assert filtered[0]['id'] == 'idA'
     assert filtered[1]['id'] == 'idB'
 
-def test_filter_duration_excludes_untitled():
+def test_filter_duration_excludes_missing_and_none_durations():
     data = data_dict()
     data_dict_append(data, 'idD', None)
+    # no duration for idD
+    data_dict_append(data, 'idE', None)
+    data['videos'][-1]['duration'] = None
 
     filtered = yt_queue.filters.filter_videos(data, { 'min-duration': 90 })
     assert len(filtered) == 2

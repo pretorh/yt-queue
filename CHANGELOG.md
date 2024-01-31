@@ -1,5 +1,11 @@
 # Changelog
 
+## unreleased
+
+### Fixed
+
+- Crash when filtering videos that have no duration
+
 ## 0.7.0
 
 ### Added
