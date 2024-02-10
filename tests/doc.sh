@@ -5,12 +5,13 @@ example_playlist="https://www.youtube.com/playlist?list=PL0pg4HdU1lNMtRzycn3wbKy
 example_video_id=BaW_jenozKc
 
 if [ "$1" = "doc" ] ; then
-  grep "^yt-queue" < "$0" | \
-    sed 's#readme-example.ytq.json#<name.ytq.json>#g' | \
-    sed 's#".example_playlist"#<url>#g' | \
-    sed 's#".example_video_id"#<video-id>#g' | \
-    sed 's#watched#<status>#g' | \
-    sed 's# |.*##g'
+  grep -E "^(yt-queue|# )" < "$0" | \
+    sed 's#readme-example.ytq.json#example.ytq.json#g' | \
+    sed 's#".example_playlist"#"'"$example_playlist"'"#g' | \
+    sed 's#".example_video_id"#"'"$example_video_id"'"#g' | \
+    sed 's# |.*##g' | \
+    sed 's,^# ,\n# ,g' | \
+    tail --lines +2
   exit 0
 else
   export PATH=".:$PATH"
@@ -31,8 +32,8 @@ yt-queue read-field readme-example.ytq.json "$example_video_id" url
 yt-queue read-field readme-example.ytq.json "$example_video_id" title
 
 # set the status
-yt-queue set-status readme-example.ytq.json "$example_video_id" watched
-yt-queue filter --status=watched readme-example.ytq.json | \
+yt-queue set-status readme-example.ytq.json "$example_video_id" some-text-status
+yt-queue filter --status=some-text-status readme-example.ytq.json | \
   grep "$example_video_id"
 
 # more filter options
