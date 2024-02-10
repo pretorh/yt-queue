@@ -49,3 +49,16 @@ yt-queue filter --min-duration 3 readme-example.ytq.json | \
   grep "$example_video_id"
 yt-queue filter --max-duration 11 readme-example.ytq.json | \
   grep "$example_video_id"
+echo ""
+
+echo "Testing markdown example"
+$0 doc > readme-example.sh
+bash -xe readme-example.sh
+echo ""
+
+echo "Markdown example:"
+echo '```sh'
+cat readme-example.sh
+echo '```'
+
+rm readme-example.sh
