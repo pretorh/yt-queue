@@ -17,8 +17,12 @@ else
   export PATH=".:$PATH"
 fi
 
+echo "Testing that example works as expected"
+rm -f readme-example.ytq.json
+
 # create a new file
 yt-queue create readme-example.ytq.json "$example_playlist"
+test -f readme-example.ytq.json
 
 # refresh a file, only if it wasnt recently updated
 yt-queue refresh readme-example.ytq.json --only-if-older=1day
@@ -28,8 +32,10 @@ yt-queue filter --no-status readme-example.ytq.json | \
   grep "$example_video_id"
 
 # read the values of a video from the file
-yt-queue read-field readme-example.ytq.json "$example_video_id" url
-yt-queue read-field readme-example.ytq.json "$example_video_id" title
+yt-queue read-field readme-example.ytq.json "$example_video_id" url | \
+  grep -E "youtube.com/.*$example_video_id"
+yt-queue read-field readme-example.ytq.json "$example_video_id" title | \
+  grep -E "test video"
 
 # set the status
 yt-queue set-status readme-example.ytq.json "$example_video_id" some-text-status
