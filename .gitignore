@@ -8,3 +8,5 @@ build/
 *.egg-info
 tests/info.json
 readme-example.ytq.json
+readme-example.sh
+example.ytq.json
