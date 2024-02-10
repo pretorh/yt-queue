@@ -3,7 +3,9 @@ CLI to keep track of videos in Youtube playlists
 
 ## cli
 
-tl;dr:
+See `yt-queue -h` and `yt-queue <subcommand> -h` for details.
+
+Examples:
 
 ```sh
 yt-queue create <name.ytq.json> <url>
@@ -23,13 +25,11 @@ yt-queue filter --min-duration 3 <name.ytq.json>
 yt-queue filter --max-duration 11 <name.ytq.json>
 ```
 
-See `yt-queue -h` or `yt-queue <subcommand> -h` for details.
-
 ### output
 
 Most cli subcommands' output (`stdout`) is parsable. `stderr` is used for logging:
 
-- `get-no-status` and `get-status` returns the video ids, 1 per line
+- `filter` returns the matching video ids, 1 per line
 - `read-field` returns the value of the field for the given video id
 
 Other subcommands output should not be parsed - they contain either progress or verbose logging (including
