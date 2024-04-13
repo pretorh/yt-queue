@@ -82,6 +82,10 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Debug logging
+      run: |
+        ls dist/
+        ls dist/yt-queue-*.tar.gz
     - name: Test source package
       run: ./dist-check.sh dist/yt-queue-*.tar.gz
     - name: Test wheel package
