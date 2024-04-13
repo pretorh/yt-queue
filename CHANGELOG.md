@@ -1,10 +1,12 @@
 # Changelog
 
-## 0.9.0
+## 0.9.1
 
-### Changed
+### Fixed
 
 - Updated `yt-dlp` to `2024.4.9`
+- dev: version bump script
+- dev: dist check ci action
 
 ## 0.8.0
 
