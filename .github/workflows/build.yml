@@ -85,9 +85,9 @@ jobs:
     - name: Debug logging
       run: |
         ls dist/
-        ls dist/yt-queue-*.tar.gz
+        ls dist/yt_queue-*.tar.gz
     - name: Test source package
-      run: ./dist-check.sh dist/yt-queue-*.tar.gz
+      run: ./dist-check.sh dist/yt_queue-*.tar.gz
     - name: Test wheel package
       run: ./dist-check.sh dist/yt_queue-*-py3-none-any.whl
 
