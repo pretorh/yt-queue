@@ -43,11 +43,11 @@ from `yt-dlp`)
 
 ## development
 
+setup (or recreate) environment with `source dev/init.sh`
+
 ```shell
 python3 -m venv .env
 source .env/bin/activate
-pip install -r requirements.txt -r requirements-dev.txt
-# or
 pip install --editable .
 pip install '.[dev]'
 ```

@@ -1,5 +1,11 @@
 # Changelog
 
+## unreleased
+
+### Changed
+
+- Updated `yt-dlp` to `2024.05.27`
+
 ## 0.9.1
 
 ### Fixed
