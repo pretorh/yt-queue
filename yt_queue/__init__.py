@@ -7,7 +7,7 @@ from .filters import filter_videos
 from .utils.loggers import StdLogger
 from .utils.time import is_stale
 
-VERSION = '0.9.1'
+VERSION = '0.10.0'
 _fullname = f"yt-queue {VERSION}"
 
 # utils
