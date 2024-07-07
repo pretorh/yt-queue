@@ -1,16 +1,10 @@
 # Changelog
 
-## unreleased
+## 0.10.1
 
 ### Changed
 
 - Updated `yt-dlp` to `2024.07.02`
-
-## 0.10.0
-
-### Changed
-
-- Updated `yt-dlp` to `2024.05.27`
 
 ## 0.9.1
 
