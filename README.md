@@ -45,6 +45,8 @@ from `yt-dlp`)
 
 setup (or recreate) environment with `source dev/init.sh`
 
+or manually:
+
 ```shell
 python3 -m venv .env
 source .env/bin/activate
