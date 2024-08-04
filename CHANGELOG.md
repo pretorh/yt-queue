@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.4
+
+### Changed
+
+- Updated `yt-dlp` to `2024.08.01`
+
 ## 0.10.3
 
 ### Changed
