@@ -12,8 +12,6 @@ def argument_parser():
     _add_create_sub_command(subparsers)
     _add_refresh_sub_command(subparsers)
     _add_info_sub_command(subparsers)
-    _add_get_no_status_sub_command(subparsers)
-    _add_get_status_sub_command(subparsers)
     _add_filter_sub_command(subparsers)
     _add_set_status_sub_command(subparsers)
     _add_read_field_sub_command(subparsers)
@@ -38,19 +36,6 @@ def _add_info_sub_command(subparsers):
     parser_info = subparsers.add_parser('info',
         help="Show info and statistics about the file and videos")
     parser_info.add_argument('file')
-
-def _add_get_no_status_sub_command(subparsers):
-    parser_get_no_statue = subparsers.add_parser('get-no-status',
-        help="List video ids that have no 'status' field. " +
-             "Use filter --no-status instead")
-    parser_get_no_statue.add_argument('file')
-
-def _add_get_status_sub_command(subparsers):
-    parser_get_statue = subparsers.add_parser('get-status',
-        help="List video ids that have a specific 'status' field value. " +
-             "Use filter --status=<status> instead")
-    parser_get_statue.add_argument('file')
-    parser_get_statue.add_argument('status')
 
 def _add_filter_sub_command(subparsers):
     parser_filter = subparsers.add_parser('filter',

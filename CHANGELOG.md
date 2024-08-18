@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.11.1
+
+### Fixed
+
+- Remove removed cli functions from help output
+
 ## 0.11.0
 
 ### Removed
