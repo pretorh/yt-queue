@@ -1,6 +1,6 @@
 # Changelog
 
-## unreleased
+## 0.11.0
 
 ### Removed
 
