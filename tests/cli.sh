@@ -108,12 +108,6 @@ $expected_video_id"
     "invalid-id
 $expected_video_id"
 
-  # deprecated
-  $cli get-no-status "$info" >$std_out 2>$log
-  assert "$(cat $std_out)" "$expected_video_id"
-  $cli get-status "$info" test-status-123 >$std_out 2>$log
-  assert "$(cat $std_out)" "invalid-id"
-
   ok
 }
 
