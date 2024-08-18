@@ -86,14 +86,6 @@ def list_filtered_ids(info, options, logger=_log):
     for video in found:
         logger.output(video['id'])
 
-def get_no_status(info, logger=_log):
-    logger.warning('get-no-status is deprecated, use filter --no-status')
-    list_filtered_ids(info, {'status': None})
-
-def get_status(info, status, logger=_log):
-    logger.warning(f'get-status is deprecated, use filter --status {status}')
-    list_filtered_ids(info, {'status': status})
-
 def set_status(info, video_id, new_status):
     data = read(info)
 
@@ -139,10 +131,6 @@ def cli(argv=sys.argv[1:]):
         refresh(args.file, only_if_older=args.only_if_older)
     elif args.sub_command == 'filter':
         list_filtered_ids(args.file, _filter_options_from_arg_parse(args))
-    elif args.sub_command == 'get-no-status':
-        get_no_status(args.file)
-    elif args.sub_command == 'get-status':
-        get_status(args.file, args.status)
     elif args.sub_command == 'set-status':
         set_status(args.file, args.video_id, args.status)
     elif args.sub_command == 'read-field':

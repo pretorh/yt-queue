@@ -1,5 +1,11 @@
 # Changelog
 
+## unreleased
+
+### Removed
+
+- Deprecated `get-no-status`, `get-status` CLI functions and `get_no_status`, `get_status` api functions
+
 ## 0.10.4
 
 ### Changed
