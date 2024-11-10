@@ -1,10 +1,14 @@
 # Changelog
 
-## 0.11.4
+## 0.11.5
 
 ### Changed
 
 - Updated `yt-dlp` to `2024.11.04`
+
+### Removed
+
+- Python 3.8 support (minimum is now `3.9`)
 
 ## 0.11.3
 
