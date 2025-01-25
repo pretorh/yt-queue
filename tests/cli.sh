@@ -4,7 +4,7 @@ set -eE
 cli=${YT_QUEUE-./yt-queue}
 playlist="https://www.youtube.com/playlist?list=PL0pg4HdU1lNMtRzycn3wbKyfQO5vQZja9"
 example_info=tests/example.info.json
-expected_video_id=BaW_jenozKc
+expected_video_id=C0DPdy98e4c
 info=tests/info.json
 log=tests/run.log
 
