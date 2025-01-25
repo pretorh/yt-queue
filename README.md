@@ -18,17 +18,17 @@ yt-queue refresh example.ytq.json --only-if-older=1day
 yt-queue filter --no-status example.ytq.json
 
 # read the values of a video from the file
-yt-queue read-field example.ytq.json "BaW_jenozKc" url
-yt-queue read-field example.ytq.json "BaW_jenozKc" title
+yt-queue read-field example.ytq.json "C0DPdy98e4c" url
+yt-queue read-field example.ytq.json "C0DPdy98e4c" title
 
 # set the status
-yt-queue set-status example.ytq.json "BaW_jenozKc" some-text-status
+yt-queue set-status example.ytq.json "C0DPdy98e4c" some-text-status
 yt-queue filter --status=some-text-status example.ytq.json
 
 # more filter options
-yt-queue filter --title "test video" example.ytq.json
+yt-queue filter --title "TEST VIDEO" example.ytq.json
 yt-queue filter --min-duration 3 example.ytq.json
-yt-queue filter --max-duration 11 example.ytq.json
+yt-queue filter --max-duration 20 example.ytq.json
 ```
 
 ### output
