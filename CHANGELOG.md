@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.11.7
+
+### Changed
+
+- Updated `yt-dlp` to `2025.01.15`
+
+### Fixed
+
+- Dev: example video used in tests
+
 ## 0.11.6
 
 ### Changed
