@@ -5,6 +5,7 @@
 ### Changed
 
 - Updated `yt-dlp` to `2025.03.31`
+- dev: update build tools
 
 ## 0.11.9
 
