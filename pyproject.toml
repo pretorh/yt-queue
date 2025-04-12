@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=78.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,11 +7,10 @@ name = "yt-queue"
 description = "CLI to keep track of videos in Youtube playlists"
 keywords = ["yt-dlp", "YouTube"]
 readme = "README.md"
-license = {file = "LICENSE"}
+license-files = ["LICENSE"]
 requires-python = ">=3.9"
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
 authors = [
