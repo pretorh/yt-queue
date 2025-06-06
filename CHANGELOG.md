@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.11.11
+
+### Changed
+
+- Updated `yt-dlp` to `2025.05.22`
+- dev: update build tools
+
 ## 0.11.10
 
 ### Changed
