@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.11.15
+
+### Changed
+
+- Updated `yt-dlp` to `2025.08.20`
+
 ## 0.11.14
 
 ### Changed
