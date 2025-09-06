@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.11.16
+
+### Changed
+
+- Updated `yt-dlp` to `2025.09.05`
+- dev: update helper scripts (version bump, add `yt-dlp` update helper)
+
 ## 0.11.15
 
 ### Changed
