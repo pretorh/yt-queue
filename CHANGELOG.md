@@ -1,9 +1,10 @@
 # Changelog
 
-## unreleased
+## 0.11.17
 
 ### Changed
 
+- Updated `yt-dlp` to `2025.09.23`
 - dev: update build tools
 
 ## 0.11.16
