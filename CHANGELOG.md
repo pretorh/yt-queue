@@ -1,5 +1,15 @@
 # Changelog
 
+## unreleased
+
+### Removed
+
+- Python 3.9 support (minimum is now `3.10`)
+
+### Updated
+
+- (Technical) build for Python `3.13` and `3.14`)
+
 ## 0.11.20
 
 ### Changed
