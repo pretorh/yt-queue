@@ -24,7 +24,6 @@ jobs:
       run: ./dev/lint.sh
 
   test:
-    if: ${{ github.ref_name == 'master' || github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -42,7 +41,6 @@ jobs:
       run: pytest
 
   build-package:
-    if: ${{ github.ref_name == 'master' }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -63,7 +61,6 @@ jobs:
         path: dist/*
 
   dist-check:
-    if: ${{ github.ref_name == 'master' }}
     needs:
       - build-package
     runs-on: ubuntu-latest
