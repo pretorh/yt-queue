@@ -1,5 +1,11 @@
 # Changelog
 
+## unreleased
+
+### Changed
+
+- Updated `yt-dlp` to `2025.12.08`. See yt-dlp [requirement changes](https://github.com/yt-dlp/yt-dlp/issues/15012) since `2025.11.12`
+
 ## 0.12.0
 
 ### Removed
@@ -8,7 +14,7 @@
 
 ### Updated
 
-- (Technical) build for Python `3.13` and `3.14`)
+- (Technical) build for Python `3.13` and `3.14`
 
 ## 0.11.20
 
