@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.13.4
+
+### Changed
+
+- Updated `yt-dlp` to `2026.03.03`
+
 ## 0.13.3
 
 ### Changed
