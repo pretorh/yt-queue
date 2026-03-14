@@ -17,8 +17,7 @@ echo yt-dlp=="$ytdlp_version" > requirements.txt
 ) > CHANGELOG.md.new
 mv CHANGELOG.md{.new,}
 
-git add --patch requirements.txt
-git add --patch CHANGELOG.md
+git add requirements.txt CHANGELOG.md
 
 dev/init.sh
 # shellcheck source=/dev/null
