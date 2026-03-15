@@ -113,3 +113,16 @@ jobs:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
         verbose: true
+    - name: Generate release details
+      id: generate_release_details
+      run: |
+        version=$(./dev/get-current-version.sh)
+        notes=$(./dev/generate-release-notes.sh)
+        echo "version=$version" >> $GITHUB_OUTPUT
+        echo "notes=$notes" >> $GITHUB_OUTPUT
+    - uses: ncipollo/release-action@v1
+      with:
+        body: ${{ steps.generate_release_details.outputs.notes }}
+        commit: ${{ github.sha }}
+        draft: true
+        tag: ${{ steps.generate_release_details.outputs.version }}
