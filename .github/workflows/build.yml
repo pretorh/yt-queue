@@ -103,6 +103,7 @@ jobs:
       with:
         name: dist
         path: dist/
+    - uses: actions/checkout@v4
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
