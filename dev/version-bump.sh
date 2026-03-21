@@ -14,10 +14,10 @@ sed -i.orig "s/^VERSION = '.*'$/VERSION = '$new_version'/" yt_queue/__init__.py
 
 git add CHANGELOG.md yt_queue/__init__.py
 git commit -m "bump to version $new_version$MESSAGE_SUFFIX"
-read -r -p "enter for diff to last release"
-echo "======================================================================================================="
-git diff --staged "$(git describe --tags --abbrev=0)"
 
 echo "======================================================================================================="
+git diff --staged "$(git describe --tags --abbrev=0)"
+echo "======================================================================================================="
+
 echo "https://github.com/pretorh/yt-queue/releases/new"
 echo "tag and release title: v$new_version"
