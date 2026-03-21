@@ -120,7 +120,10 @@ jobs:
         version=$(./dev/get-current-version.sh)
         notes=$(./dev/generate-release-notes.sh)
         echo "version=$version" >> $GITHUB_OUTPUT
-        echo "notes=$notes" >> $GITHUB_OUTPUT
+        eof=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+        echo "notes<<$eof" >> $GITHUB_OUTPUT
+        echo "$notes" >> $GITHUB_OUTPUT
+        echo "$eof" >> $GITHUB_OUTPUT
     - uses: ncipollo/release-action@v1
       with:
         body: ${{ steps.generate_release_details.outputs.notes }}
