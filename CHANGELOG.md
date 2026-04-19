@@ -1,5 +1,12 @@
 # Changelog
 
+## unreleased
+
+## Changed
+
+- dev: upgrade `pytest`
+- dev: CI improvements
+
 ## 0.13.6
 
 ### Changed

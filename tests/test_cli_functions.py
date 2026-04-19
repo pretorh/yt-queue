@@ -34,13 +34,13 @@ def test_can_output_info(file_with_some_data, capsys):
 
     yt_queue.show_info(file)
     captured = capsys.readouterr()
-    # the output is not _fully_ parsable, but contains:
-    assert captured.out.find("https://example.com/playlist/1") != -1
-    assert captured.out.find("Last refreshed: ") != -1
-    assert captured.out.find("3 videos") != -1
-    assert captured.out.find("1 distinct status:") != -1
-    assert captured.out.find("2 with test") != -1
-    assert captured.out.find("1 with no status") != -1
+    # the output cannot not be _fully_ parsed, but contains:
+    assert "https://example.com/playlist/1" in captured.err
+    assert "Last refreshed: " in captured.out
+    assert "3 videos" in captured.out
+    assert "1 distinct status:" in captured.out
+    assert "2 with test" in captured.out
+    assert "1 with no status" in captured.out
 
 def test_can_filter_by_status(file_with_some_data, capsys):
     file = file_with_some_data
