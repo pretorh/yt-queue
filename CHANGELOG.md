@@ -1,9 +1,10 @@
 # Changelog
 
-## unreleased
+## 0.13.7
 
-## Changed
+### Changed
 
+- Updated `yt-dlp` to `2026.06.09`
 - dev: upgrade `pytest`
 - dev: CI improvements
 
