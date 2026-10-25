@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.13.10
+
+### Changed
+
+- Updated `yt-dlp` to `2026.10.21`
+- dev: upgrade setup tools
+
 ## 0.13.9
 
 ### Changed
