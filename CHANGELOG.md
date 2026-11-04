@@ -1,6 +1,10 @@
 # Changelog
 
-## unreleased
+## 0.14.0
+
+### Changed
+
+- Updated `yt-dlp` to `2026.10.26`
 
 ### Removed
 
@@ -10,6 +14,7 @@
 
 - (Technical) build for Python `3.15`
 - (Technical) updated `pylint` to `4.0.9`
+- (Technical) upgrade setup tools
 
 ## 0.13.10
 
