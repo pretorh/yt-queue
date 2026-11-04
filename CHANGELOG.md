@@ -9,6 +9,7 @@
 ### Updated
 
 - (Technical) build for Python `3.15`
+- (Technical) updated `pylint` to `4.0.9`
 
 ## 0.13.10
 
