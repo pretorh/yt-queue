@@ -1,5 +1,15 @@
 # Changelog
 
+## unreleased
+
+### Removed
+
+- Python 3.10 support (minimum is now `3.11`)
+
+### Updated
+
+- (Technical) build for Python `3.15`
+
 ## 0.13.10
 
 ### Changed
