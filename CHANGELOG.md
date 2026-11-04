@@ -1,5 +1,11 @@
 # Changelog
 
+## unreleased
+
+### Updated
+
+- (Technical) bump CI actions
+
 ## 0.14.0
 
 ### Changed
