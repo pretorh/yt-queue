@@ -8,7 +8,7 @@ from .utils.loggers import StdLogger
 from .utils.time import is_stale
 
 VERSION = '0.13.10'
-_fullname = f"yt-queue {VERSION}"
+_FULLNAME = f"yt-queue {VERSION}"
 
 # utils
 
@@ -122,7 +122,7 @@ def cli(argv=sys.argv[1:]):
     args = parser.parse_args(argv)
 
     if args.sub_command == 'version':
-        _log.output(_fullname)
+        _log.output(_FULLNAME)
     elif args.sub_command == 'create':
         create(args.file, args.url)
     elif args.sub_command == 'info':
@@ -136,6 +136,6 @@ def cli(argv=sys.argv[1:]):
     elif args.sub_command == 'read-field':
         read_field(args.file, args.video_id, args.field_name)
     else:
-        _log.info(_fullname)
+        _log.info(_FULLNAME)
         _log.warning(f'Cli argument parsing failed {sys.argv} {args}')
         sys.exit(1)
